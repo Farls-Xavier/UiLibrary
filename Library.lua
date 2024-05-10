@@ -69,6 +69,10 @@ local Library = {} -- Temporary name
     end
 
     function Library:Window(title)
+        -- Vars 
+        local Minimized = false
+
+        -- Instancing
         local MainFrame = Instance.new("Frame")
         local MainFrameUiCorner = Instance.new("UICorner")
         local Topbar = Instance.new("Frame")
@@ -76,6 +80,11 @@ local Library = {} -- Temporary name
         local Title = Instance.new("TextLabel")
         local MinimizeButton = Instance.new("ImageButton")
         local CloseButton = Instance.new("ImageButton")
+
+        -- Tweens
+        local minimizeTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 18)})
+        local openTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0, 681, 0, 396)})
+        local closeTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 18)})
 
         MainFrame.Name = "MainFrame"
         MainFrame.Parent = ScreenGui
@@ -96,7 +105,7 @@ local Library = {} -- Temporary name
         Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Topbar.BorderSizePixel = 0
         Topbar.Position = UDim2.new(-8.96257788e-08, 0, 0, 0)
-        Topbar.Size = UDim2.new(1, 0, 0.050932385, 0)
+        Topbar.Size = UDim2.new(0, 681, 0, 20)
 
         TopbarUiCorner.CornerRadius = UDim.new(0, 1)
         TopbarUiCorner.Name = "TopbarUiCorner"
@@ -128,7 +137,12 @@ local Library = {} -- Temporary name
         MinimizeButton.Image = "rbxassetid://14950036748"
         MinimizeButton.ScaleType = Enum.ScaleType.Fit
         MinimizeButton.Activated:Connect(function()
-            TweenService:Create(MainFrame, TweenInfo.new(.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 0)}):Play()
+            Minimized = not Minimized
+            if Minimized then
+                minimizeTween:Play()
+                else
+                    openTween:Play()
+            end
         end)
 
         CloseButton.Name = "CloseButton"
@@ -142,8 +156,10 @@ local Library = {} -- Temporary name
         CloseButton.Image = "rbxassetid://14914803223"
         CloseButton.ScaleType = Enum.ScaleType.Fit
         CloseButton.Activated:Connect(function()
-            TweenService:Create(MainFrame, TweenInfo.new(.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 0)}):Play()
-            ScreenGui:Destroy()
+            closeTween:Play()
+            closeTween.Completed:Connect(function()
+                ScreenGui:Destroy()
+            end)
         end)
 
         MakeDraggable(Topbar, MainFrame)
