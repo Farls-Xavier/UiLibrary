@@ -125,7 +125,7 @@ local Library = {} -- Temporary name
         MinimizeButton.BorderSizePixel = 0
         MinimizeButton.Position = UDim2.new(0.941262841, 0, 0, 0)
         MinimizeButton.Size = UDim2.new(0, 20, 0, 20)
-        MinimizeButton.Image = "rbxassetid://13846124317"
+        MinimizeButton.Image = "rbxassetid://14950036748"
         MinimizeButton.ScaleType = Enum.ScaleType.Fit
         MinimizeButton.Activated:Connect(function()
             TweenService:Create(MainFrame, TweenInfo.new(.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 0)}):Play()
