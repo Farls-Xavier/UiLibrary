@@ -68,12 +68,14 @@ local Library = {} -- Temporary name
         )
     end
 
-    function Library:Window(text)
+    function Library:Window(title)
         local MainFrame = Instance.new("Frame")
         local MainFrameUiCorner = Instance.new("UICorner")
         local Topbar = Instance.new("Frame")
         local TopbarUiCorner = Instance.new("UICorner")
         local Title = Instance.new("TextLabel")
+        local MinimizeButton = Instance.new("ImageButton")
+        local CloseButton = Instance.new("ImageButton")
 
         MainFrame.Name = "MainFrame"
         MainFrame.Parent = ScreenGui
@@ -81,8 +83,8 @@ local Library = {} -- Temporary name
         MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
         MainFrame.BorderSizePixel = 0
-        MainFrame.Position = UDim2.new(0.5, 0, 0.488023967, 0)
-        MainFrame.Size = UDim2.new(0.394495428, 0, 0.389221549, 0)
+        MainFrame.Position = UDim2.new(0.499802828, 0, 0.499356478, 0)
+        MainFrame.Size = UDim2.new(0, 681, 0, 396)
 
         MainFrameUiCorner.CornerRadius = UDim.new(0, 2)
         MainFrameUiCorner.Name = "MainFrameUiCorner"
@@ -93,9 +95,10 @@ local Library = {} -- Temporary name
         Topbar.BackgroundColor3 = Color3.fromRGB(22, 17, 27)
         Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Topbar.BorderSizePixel = 0
-        Topbar.Size = UDim2.new(0.99999994, 0, 0.0660839081, 0)
+        Topbar.Position = UDim2.new(-8.96257788e-08, 0, 0, 0)
+        Topbar.Size = UDim2.new(1, 0, 0.050932385, 0)
 
-        TopbarUiCorner.CornerRadius = UDim.new(0, 2)
+        TopbarUiCorner.CornerRadius = UDim.new(0, 1)
         TopbarUiCorner.Name = "TopbarUiCorner"
         TopbarUiCorner.Parent = Topbar
 
@@ -105,11 +108,43 @@ local Library = {} -- Temporary name
         Title.BackgroundTransparency = 1.000
         Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Title.BorderSizePixel = 0
-        Title.Size = UDim2.new(0.109302327, 0, 1, 0)
+        Title.Position = UDim2.new(0.00870000012, 0, 0, 0)
+        Title.Size = UDim2.new(0.110132165, 0, 1, 0)
         Title.Font = Enum.Font.Gotham
-        Title.Text = text
+        Title.Text = "Title"
         Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Title.TextSize = 14.000
+        Title.TextSize = 13.000
+        Title.TextWrapped = true
+        Title.TextXAlignment = Enum.TextXAlignment.Left
+
+        MinimizeButton.Name = "MinimizeButton"
+        MinimizeButton.Parent = Topbar
+        MinimizeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        MinimizeButton.BackgroundTransparency = 1.000
+        MinimizeButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        MinimizeButton.BorderSizePixel = 0
+        MinimizeButton.Position = UDim2.new(0.941262841, 0, 0, 0)
+        MinimizeButton.Size = UDim2.new(0, 20, 0, 20)
+        MinimizeButton.Image = "rbxassetid://13846124317"
+        MinimizeButton.ScaleType = Enum.ScaleType.Fit
+        MinimizeButton.Activated:Connect(function()
+            TweenService:Create(MainFrame, TweenInfo.new(.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 0)}):Play()
+        end)
+
+        CloseButton.Name = "CloseButton"
+        CloseButton.Parent = Topbar
+        CloseButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        CloseButton.BackgroundTransparency = 1.000
+        CloseButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        CloseButton.BorderSizePixel = 0
+        CloseButton.Position = UDim2.new(0.970631421, 0, 0, 0)
+        CloseButton.Size = UDim2.new(0, 20, 0, 20)
+        CloseButton.Image = "rbxassetid://14914803223"
+        CloseButton.ScaleType = Enum.ScaleType.Fit
+        CloseButton.Activated:Connect(function()
+            TweenService:Create(MainFrame, TweenInfo.new(.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 0)}):Play()
+            ScreenGui:Destroy()
+        end)
 
         MakeDraggable(Topbar, MainFrame)
     end
