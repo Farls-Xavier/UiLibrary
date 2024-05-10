@@ -81,11 +81,6 @@ local Library = {} -- Temporary name
         local MinimizeButton = Instance.new("ImageButton")
         local CloseButton = Instance.new("ImageButton")
 
-        -- Tweens
-        local minimizeTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 18)})
-        local openTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0, 681, 0, 396)})
-        local closeTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 18)})
-
         MainFrame.Name = "MainFrame"
         MainFrame.Parent = ScreenGui
         MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -125,6 +120,11 @@ local Library = {} -- Temporary name
         Title.TextSize = 13.000
         Title.TextWrapped = true
         Title.TextXAlignment = Enum.TextXAlignment.Left
+
+        -- Tweens
+        local minimizeTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 18)})
+        local openTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0, 681, 0, 396)})
+        local closeTween = TweenService:Create(MainFrame, TweenInfo.new(.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(MainFrame.Size.X, 18)})
 
         MinimizeButton.Name = "MinimizeButton"
         MinimizeButton.Parent = Topbar
