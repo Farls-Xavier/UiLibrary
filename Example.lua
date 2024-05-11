@@ -7,10 +7,20 @@ local Window = Library:Window({
 local Tabs = {
 	["Test"] = Window:Tab({
 		Text = "Test", Icon = "" -- rbxassetid://1234567890
+	}),
+	["Test2"] = Window:Tab({
+		Text = "Test2", Icon = ""
 	})
 }
 
 local Btn1 = Tabs.Test:Button({
+	Text = "Refresh Playerlist",
+	Callback = function()
+		Window:UpdatePlayerList()
+	end,
+})
+
+local Btn2 = Tabs.Test2:Button({
 	Text = "Refresh Playerlist",
 	Callback = function()
 		Window:UpdatePlayerList()
