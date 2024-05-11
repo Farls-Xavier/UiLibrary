@@ -524,7 +524,7 @@ function Library:Window(args)
 
 	GotoButton.Activated:Connect(function()
 		if This.SelectedTarget ~= nil then
-			TweenService:Create(Player.Character.HumanoidRootPart, TweenInfo.new(.05), {CFrame = Players:FindFirstChild(This.SelectedTarget):FindFirstChild("Character").HumanoidRootPart.CFrame}):Play()
+			TweenService:Create(Player.Character.HumanoidRootPart, TweenInfo.new(.05), {CFrame = Players:FindFirstChild(This.SelectedTarget).Character.HumanoidRootPart.CFrame}):Play()
 		end
 	end)
 
@@ -713,4 +713,4 @@ function Library:Window(args)
 end
 
 return Library
----GLIGGER IS KING 100%
+--GLIGGER KING VERSIOn 1231
