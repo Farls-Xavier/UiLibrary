@@ -415,9 +415,9 @@ function Library:Window(args)
 	UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout_2.Padding = UDim.new(0, 1)
 
-	UIListLayout_2.Parent = Template
-	UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout_2.Padding = UDim.new(0, 5)
+	UIListLayout_3.Parent = Template
+	UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout_3.Padding = UDim.new(0, 5)
 
 	TemplatePlayerLabel.Name = "TemplatePlayerLabel"
 	TemplatePlayerLabel.Parent = PlayersList
@@ -484,36 +484,36 @@ function Library:Window(args)
 	MakeDraggable(Topbar, MainFrame)
 
 	function This:UpdatePlayerList()
-		local toClone = List.ScrollingFrame.PlayersList.TemplatePlayerLabel
+        local toClone = List.ScrollingFrame.PlayersList.TemplatePlayerLabel
 
-		for i,v in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
-			if v:IsA("TextButton") and v.Name ~= "TemplatePlayerLabel" then
-				v:Destroy()
-			end
+        for i,v in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
+            if v:IsA("TextButton") and v.Name ~= "TemplatePlayerLabel" then
+                v:Destroy()
+            end
+        end
 
-			for _, player in pairs(Players:GetPlayers()) do
-				if player ~= Player and v.Name ~= "TemplatePlayerLabel" then
-					local Cloned = toClone:Clone()
-					Cloned.Visible = true
-					Cloned.Parent = List.ScrollingFrame.PlayersList
-					Cloned.Text = player.Name
-					Cloned.Name = player.Name
+        for _, player in pairs(Players:GetPlayers()) do
+            if player ~= Player then
+                local Cloned = toClone:Clone()
+                Cloned.Visible = true
+                Cloned.Parent = List.ScrollingFrame.PlayersList
+                Cloned.Text = player.Name
+                Cloned.Name = player.Name
+    
+                Cloned.MouseButton1Click:Connect(function()
+                    This.SelectedTarget = Cloned.Name
+                    Library:tween(Cloned, {TextColor3 = Color3.fromRGB(255,255,255)})
 
-					Cloned.MouseButton1Click:Connect(function()
-						This.SelectedTarget = Cloned.Name
-						Library:tween(Cloned, {TextColor3 = Color3.fromRGB(255,255,255)})
-
-						for _, labels in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
-							if labels:IsA("TextButton") and labels ~= Cloned then
-								Library:tween(labels, {TextColor3 = Color3.fromRGB(200,200,200)})
-							end
-						end
-					end)
-				end
-			end
-		end
-	end
-
+                    for _, label in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
+                        if label:IsA("TextButton") and label ~= Cloned then
+                            Library:tween(label, {TextColor3 = Color3.fromRGB(200,200,200)})
+                        end
+                    end
+                end)
+            end
+        end
+    end
+    
 	This:UpdatePlayerList()
 
 	Players.PlayerAdded:Connect(function() This:UpdatePlayerList() end)
