@@ -124,6 +124,7 @@ function Library:Window(args)
     local TemplateLabel = Instance.new("Frame")
     local LabelUICorner = Instance.new("UICorner")
     local Label = Instance.new("TextLabel")
+    local UIListLayout_2 = Instance.new("UIListLayout")
     local List = Instance.new("Frame")
     local ListUiCorner = Instance.new("UICorner")
     local GotoButton = Instance.new("TextButton")
@@ -132,7 +133,7 @@ function Library:Window(args)
     local SpectateButtonUICorner = Instance.new("UICorner")
     local ScrollingFrame = Instance.new("ScrollingFrame")
     local PlayersList = Instance.new("Folder")
-    local UIListLayout_2 = Instance.new("UIListLayout")
+    local UIListLayout_3 = Instance.new("UIListLayout")
     local TemplatePlayerLabel = Instance.new("TextButton")
 
 	MainFrame.Name = "MainFrame"
@@ -414,6 +415,10 @@ function Library:Window(args)
     UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
     UIListLayout_2.Padding = UDim.new(0, 1)
 
+    UIListLayout_2.Parent = Template
+    UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout_2.Padding = UDim.new(0, 5)
+
     TemplatePlayerLabel.Name = "TemplatePlayerLabel"
     TemplatePlayerLabel.Parent = PlayersList
     TemplatePlayerLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -680,6 +685,18 @@ function Library:Window(args)
 			function Label:SetText(text)
 				RenderedLabel.Label.Text = tostring("  "..text)
 			end 
+
+            RenderedLabel.MouseEnter:Connect(function()
+                Label.Hover = true
+
+                Library:tween(RenderedLabel.Label, {TextColor3 = Color3.fromRGB(255, 255, 255)})
+            end)
+
+            RenderedLabel.MouseLeave:Connect(function()
+                Label.Hover = false
+
+                Library:tween(RenderedLabel.Label, {TextColor3 = Color3.fromRGB(200, 200, 200)})
+            end)
 
 			return Label
 		end
