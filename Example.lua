@@ -11,15 +11,8 @@ local Tabs = {
 }
 
 local Btn1 = Tabs.Test:Button({
-	Text = "Press me!",
+	Text = "Refresh Playerlist",
 	Callback = function()
-		warn("Pressed!")
+		Window:UpdatePlayerList()
 	end,
 })
-
-local i = 0
-
-Btn1:SetCallback(function()
-	i += 1
-	Btn1:SetText("  Pressed "..i.." times!")
-end)
