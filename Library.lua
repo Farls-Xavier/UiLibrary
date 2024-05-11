@@ -501,7 +501,7 @@ function Library:Window(args)
                     Cloned:Destroy()
                 end
                 Cloned.Text = player.DisplayName
-                Cloned.Name = player.DisplayName
+                Cloned.Name = player.Name
     
                 Cloned.MouseButton1Click:Connect(function()
                     This.SelectedTarget = Cloned.Name
@@ -524,7 +524,7 @@ function Library:Window(args)
 
 	GotoButton.Activated:Connect(function()
 		if This.SelectedTarget ~= nil then
-			TweenService:Create(Player.Character.HumanoidRootPart, TweenInfo.new(.05), {CFrame = Players:FindFirstChild(This.SelectedTarget).Character.HumanoidRootPart.CFrame}):Play()
+			TweenService:Create(Player.Character.HumanoidRootPart, TweenInfo.new(.05), {CFrame = Players:FindFirstChild(This.SelectedTarget):WaitForChild("Character").HumanoidRootPart.CFrame}):Play()
 		end
 	end)
 
