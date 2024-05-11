@@ -524,7 +524,7 @@ function Library:Window(args)
 
 	GotoButton.Activated:Connect(function()
 		if This.SelectedTarget ~= nil then
-			TweenService:Create(Player.Character.HumanoidRootPart, TweenInfo.new(.05), {CFrame = Players:FindFirstChild(This.SelectedTarget):WaitForChild("Character").HumanoidRootPart.CFrame}):Play()
+			TweenService:Create(Player.Character.HumanoidRootPart, TweenInfo.new(.05), {CFrame = Players:FindFirstChild(This.SelectedTarget):FindFirstChild("Character").HumanoidRootPart.CFrame}):Play()
 		end
 	end)
 
@@ -713,3 +713,71 @@ function Library:Window(args)
 end
 
 return Library
+
+
+--[[ :EXAMPLE
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Library.lua"))()
+    
+    --Create window
+    local Window = Library:Window({
+        Title = "Ui Library"
+    })
+
+    --Make tabs by using the tab function
+    local Tabs = {
+        ["Home"] = Window:Tab({
+            Text = "Home",
+            Icon = "rbxassetid://13848371774"
+        }),
+        ["Player"] = Window:Tab({
+            Text = "Player",
+            Icon = ""
+        }),
+        ["Players"] = Window:Tab({
+            Text = "Players",
+            Icon = ""
+        })
+    }
+
+    --For buttons labels toggles etc
+    Tabs.Home:Button({
+        Text = "Press me!",
+        Callback = function()
+            print("Pressed")
+        end,
+    })
+
+    Tabs.Player:Toggle({
+        Text = "Toggle me!",
+        Callback = function()
+            --IDK YET
+        end,
+    })
+
+    Tabs.Players:Label({
+        Text = "Label"
+    })
+
+    Extra funcs 
+
+    Button:SetCallback(FUNCTION) Can be used in multiple ways heres an example
+    
+    [
+    	local Btn1 = Tabs.Home:Button({
+        	Text = "Press me!",
+       	 	Callback = function()
+            print("Pressed")
+        	end,
+    	})
+    	
+    	local i
+		Btn1:SetCallback(function()
+			i = i or 0
+			i += 1
+			Btn1:SetText("  Pressed "..i.." times!")
+		end)
+	]
+
+    Label:SetText("Text")
+    
+]]
