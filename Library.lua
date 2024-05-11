@@ -497,8 +497,11 @@ function Library:Window(args)
                 local Cloned = toClone:Clone()
                 Cloned.Visible = true
                 Cloned.Parent = List.ScrollingFrame.PlayersList
-                Cloned.Text = player.Name
-                Cloned.Name = player.Name
+                if string.len(player.DisplayName) > 20 then
+                    Cloned:Destroy()
+                end
+                Cloned.Text = player.DisplayName
+                Cloned.Name = player.DisplayName
     
                 Cloned.MouseButton1Click:Connect(function()
                     This.SelectedTarget = Cloned.Name
@@ -521,7 +524,7 @@ function Library:Window(args)
 
 	GotoButton.Activated:Connect(function()
 		if This.SelectedTarget ~= nil then
-			Player.Character.HumanoidRootPart.CFrame = Players:FindFirstChild(This.SelectedTarget).Character.HumanoidRootPart.CFrame
+			TweenService:Create(Player.Character.HumanoidRootPart, TweenInfo.new(.05), {CFrame = Players:FindFirstChild(This.SelectedTarget).Character.HumanoidRootPart.CFrame}):Play()
 		end
 	end)
 
