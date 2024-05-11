@@ -1,5 +1,6 @@
 local Library = {} -- Temporary name
 
+local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -91,34 +92,48 @@ function Library:Window(args)
 
 	-- Vars 
 	local This = {
-		CurrentTab = nil
+		CurrentTab = nil,
+        SelectedTarget = nil
 	}
 	local Minimized = false
 
 	-- Instancing
 	local MainFrame = Instance.new("Frame")
-	local MainFrameUiCorner = Instance.new("UICorner")
-	local Topbar = Instance.new("Frame")
-	local TopbarUiCorner = Instance.new("UICorner")
-	local Title = Instance.new("TextLabel")
-	local MinimizeButton = Instance.new("ImageButton")
-	local CloseButton = Instance.new("ImageButton")
-	local Navigation = Instance.new("Frame")
-	local TemplateTabButton = Instance.new("TextButton")
-	local TabButtonImage = Instance.new("ImageLabel")
-	local TabButtonUiCorner = Instance.new("UICorner")
-	local UIListLayout = Instance.new("UIListLayout")
-	local TabHolderUiCorner = Instance.new("UICorner")
-	local DropShadowHolder = Instance.new("Frame")
-	local DropShadow = Instance.new("ImageLabel")
-	local Tabholder = Instance.new("Frame")
-	local Template = Instance.new("ScrollingFrame")
-	local TemplateButton = Instance.new("Frame")
-	local ButtonUICorner = Instance.new("UICorner")
-	local Detection = Instance.new("TextButton")
-	local DetectionUICorner = Instance.new("UICorner")
-	local ButtonImage = Instance.new("ImageLabel")
-	local ButtonImageUiCorner = Instance.new("UICorner")
+    local MainFrameUiCorner = Instance.new("UICorner")
+    local Topbar = Instance.new("Frame")
+    local TopbarUiCorner = Instance.new("UICorner")
+    local Title = Instance.new("TextLabel")
+    local MinimizeButton = Instance.new("ImageButton")
+    local CloseButton = Instance.new("ImageButton")
+    local Navigation = Instance.new("Frame")
+    local TemplateTabButton = Instance.new("TextButton")
+    local TabButtonImage = Instance.new("ImageLabel")
+    local TabButtonUiCorner = Instance.new("UICorner")
+    local UIListLayout = Instance.new("UIListLayout")
+    local TabHolderUiCorner = Instance.new("UICorner")
+    local DropShadowHolder = Instance.new("Frame")
+    local DropShadow = Instance.new("ImageLabel")
+    local Tabholder = Instance.new("Frame")
+    local Template = Instance.new("ScrollingFrame")
+    local TemplateButton = Instance.new("Frame")
+    local ButtonUICorner = Instance.new("UICorner")
+    local Detection = Instance.new("TextButton")
+    local DetectionUICorner = Instance.new("UICorner")
+    local ButtonImage = Instance.new("ImageLabel")
+    local ButtonImageUiCorner = Instance.new("UICorner")
+    local TemplateLabel = Instance.new("Frame")
+    local LabelUICorner = Instance.new("UICorner")
+    local Label = Instance.new("TextLabel")
+    local List = Instance.new("Frame")
+    local ListUiCorner = Instance.new("UICorner")
+    local GotoButton = Instance.new("TextButton")
+    local GotoButtonUICorner = Instance.new("UICorner")
+    local SpectateButton = Instance.new("TextButton")
+    local SpectateButtonUICorner = Instance.new("UICorner")
+    local ScrollingFrame = Instance.new("ScrollingFrame")
+    local PlayersList = Instance.new("Folder")
+    local UIListLayout_2 = Instance.new("UIListLayout")
+    local TemplatePlayerLabel = Instance.new("TextButton")
 
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = ScreenGui
@@ -313,18 +328,117 @@ function Library:Window(args)
 	ButtonImageUiCorner.Name = "ButtonImageUiCorner"
 	ButtonImageUiCorner.Parent = ButtonImage
 
+	TemplateLabel.Name = "TemplateLabel"
+	TemplateLabel.Parent = Template
+	TemplateLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	TemplateLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TemplateLabel.BorderSizePixel = 0
+	TemplateLabel.Position = UDim2.new(0, 0, 0.0622837506, 0)
+	TemplateLabel.Size = UDim2.new(0, 250, 0, 20)
+	TemplateLabel.Visible = false
+
+	LabelUICorner.CornerRadius = UDim.new(0, 2)
+	LabelUICorner.Name = "LabelUICorner"
+	LabelUICorner.Parent = TemplateLabel
+
+	Label.Name = "Label"
+	Label.Parent = TemplateLabel
+	Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Label.BackgroundTransparency = 1.000
+	Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Label.BorderSizePixel = 0
+	Label.Size = UDim2.new(1, 0, 1, 0)
+	Label.Font = Enum.Font.GothamMedium
+	Label.Text = "  Label"
+	Label.TextColor3 = Color3.fromRGB(200, 200, 200)
+	Label.TextSize = 14.000
+	Label.TextWrapped = true
+	Label.TextXAlignment = Enum.TextXAlignment.Left
+
+	List.Name = "List"
+    List.Parent = MainFrame
+    List.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+    List.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    List.BorderSizePixel = 0
+    List.Position = UDim2.new(0.775700927, 0, 0.0939393938, 0)
+    List.Size = UDim2.new(0, 113, 0, 215)
+
+    ListUiCorner.CornerRadius = UDim.new(0, 2)
+    ListUiCorner.Name = "ListUiCorner"
+    ListUiCorner.Parent = List
+
+    GotoButton.Name = "GotoButton"
+    GotoButton.Parent = List
+    GotoButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    GotoButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    GotoButton.BorderSizePixel = 0
+    GotoButton.Position = UDim2.new(0, 0, 1.03255808, 0)
+    GotoButton.Size = UDim2.new(0, 113, 0, 25)
+    GotoButton.Font = Enum.Font.Gotham
+    GotoButton.Text = "Goto"
+    GotoButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    GotoButton.TextSize = 14.000
+
+    GotoButtonUICorner.CornerRadius = UDim.new(0, 2)
+    GotoButtonUICorner.Name = "GotoButtonUICorner"
+    GotoButtonUICorner.Parent = GotoButton
+
+    SpectateButton.Name = "SpectateButton"
+    SpectateButton.Parent = List
+    SpectateButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    SpectateButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    SpectateButton.BorderSizePixel = 0
+    SpectateButton.Position = UDim2.new(0, 0, 1.17674422, 0)
+    SpectateButton.Size = UDim2.new(0, 113, 0, 25)
+    SpectateButton.Font = Enum.Font.Gotham
+    SpectateButton.Text = "Spectate"
+    SpectateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    SpectateButton.TextSize = 14.000
+
+    SpectateButtonUICorner.CornerRadius = UDim.new(0, 2)
+    SpectateButtonUICorner.Name = "SpectateButtonUICorner"
+    SpectateButtonUICorner.Parent = SpectateButton
+
+    ScrollingFrame.Parent = List
+    ScrollingFrame.Active = true
+    ScrollingFrame.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+    ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ScrollingFrame.BorderSizePixel = 0
+    ScrollingFrame.Size = UDim2.new(1, 0, 1, 0)
+    ScrollingFrame.ScrollBarThickness = 2
+
+    PlayersList.Name = "PlayersList"
+    PlayersList.Parent = ScrollingFrame
+
+    UIListLayout_2.Parent = PlayersList
+    UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout_2.Padding = UDim.new(0, 1)
+
+    TemplatePlayerLabel.Name = "TemplatePlayerLabel"
+    TemplatePlayerLabel.Parent = PlayersList
+    TemplatePlayerLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    TemplatePlayerLabel.BackgroundTransparency = 1.000
+    TemplatePlayerLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    TemplatePlayerLabel.BorderSizePixel = 0
+    TemplatePlayerLabel.Size = UDim2.new(0, 113, 0, 15)
+    TemplatePlayerLabel.Visible = false
+    TemplatePlayerLabel.Font = Enum.Font.GothamMedium
+    TemplatePlayerLabel.Text = "Botnetix"
+    TemplatePlayerLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    TemplatePlayerLabel.TextSize = 12.000
+
 	MinimizeButton.Activated:Connect(function()
 		Minimized = not Minimized
 		if Minimized then
 			for i,v in pairs(MainFrame:GetDescendants()) do
-				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name then
+				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder then
 					v.Visible = false
 				end
 			end
 			minimizeTween:Play()
 		else
 			for i,v in pairs(MainFrame:GetDescendants()) do
-				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name then
+				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder then
 					v.Visible = true
 				end
 			end
@@ -340,7 +454,7 @@ function Library:Window(args)
 					v:Destroy()
 				end
 			end
-			if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name then
+			if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent ~= Tabholder then
 				v:Destroy()
 			end
 		end
@@ -361,6 +475,48 @@ function Library:Window(args)
 	end)
 
 	MakeDraggable(Topbar, MainFrame)
+
+	function This:UpdatePlayerList()
+		local toClone = List.ScrollingFrame.PlayersList.TemplatePlayerLabel
+
+		for i,v in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
+			if v:IsA("TextButton") and v.Name ~= "TemplatePlayerLabel" then
+				v:Destroy()
+			end
+
+			for _, player in pairs(Players:GetPlayers()) do
+                if player ~= Player and v.Name ~= "TemplatePlayerLabel" then
+                    local Cloned = toClone:Clone()
+                    Cloned.Visible = true
+				    Cloned.Parent = List.ScrollingFrame.PlayersList
+				    Cloned.Text = player.Name
+				    Cloned.Name = player.Name
+
+                    Cloned.MouseButton1Click:Connect(function()
+                        This.SelectedTarget = Cloned.Name
+                        Library:tween(Cloned, {TextColor3 = Color3.fromRGB(255,255,255)})
+
+                        for _, labels in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
+                            if labels:IsA("TextButton") and labels ~= Cloned then
+                                Library:tween(labels, {TextColor3 = Color3.fromRGB(200,200,200)})
+                            end
+                        end
+                    end)
+                end
+			end
+		end
+	end
+
+	This:UpdatePlayerList()
+
+	Players.PlayerAdded:Connect(function() This:UpdatePlayerList() end)
+	Players.PlayerRemoving:Connect(function() This:UpdatePlayerList() end)
+
+    GotoButton.Activated:Connect(function()
+         if This.SelectedTarget ~= nil then
+            Player.Character.HumanoidRootPart.CFrame = Players:FindFirstChild(This.SelectedTarget).Character.HumanoidRootPart.CFrame
+         end
+    end)
 
 	function This:Tab(args)
 		args = Library:Validate({
@@ -506,12 +662,24 @@ function Library:Window(args)
 
 		function Tab:Label(args)
 			args = Library:Validate({
-				Text = "Button",
+				Text = "  Label",
+				Weight = Enum.FontWeight.Medium
 			}, args or {})
 
 			local Label = {
-				Hover = false,
+				Hover = false
 			}
+
+			local RenderedLabel = TemplateLabel:Clone()
+
+			RenderedLabel.Parent = TabFrame
+			RenderedLabel.Label.FontFace.Weight = args.Weight
+			RenderedLabel.Label.Text = "  "..args.Text
+			RenderedLabel.Visible = true
+
+			function Label:SetText(text)
+				RenderedLabel.Label.Text = tostring("  "..text)
+			end 
 
 			return Label
 		end
