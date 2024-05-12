@@ -712,7 +712,8 @@ function Library:Window(args)
 		end)
 
 		local co = coroutine.create(function()
-			for i = duration, 0, -1 do
+			for i = duration, 0 do
+				i = i -1
 				NewNotification.MSG.Text = msg.."("..duration..")s"
 				wait(1)
 			end
@@ -1068,6 +1069,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.1.2")
+print("This is version 1.1.3")
 
 return Library
