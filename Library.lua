@@ -7,22 +7,19 @@ local RunService = game:GetService("RunService")
 
 local Player = game:GetService("Players").LocalPlayer
 local Camera = workspace.CurrentCamera
-local ViewportSize = Camera.ViewportSize
 local Mouse = Player:GetMouse()
 
+local Names = {
+    "MadebyFarls",
+    "ThisIsAOverlappedInstance",
+    "ThisisNOTaOverlappedInstance"
+}
+local randomName = math.random(1, #Names)
+
 local ScreenGui = Instance.new("ScreenGui")
-local ThisReference = Instance.new("StringValue", ScreenGui)
-ThisReference.Name = "UiReference"
-ThisReference.Value = "1"
-ScreenGui.Name = "ScreenGui"
+ScreenGui.Name = Names[randomName]
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-for i,v in pairs(Player.PlayerGui:GetDescendants()) do
-	if v.Value == "1" and not v == ThisReference then
-		v.Parent:Destroy()
-	end
-end
 
 local function MakeDraggable(topbarobject, object)
 	local Dragging = nil
@@ -107,6 +104,10 @@ function Library:Window(args)
 		SelectedTarget = nil
 	}
 	local Minimized = false
+
+	for _, OverLappedInstance in pairs(Player.PlayerGui:GetChildren()) do
+		
+	end
 
 	-- Instancing
 	local MainFrame = Instance.new("Frame")
@@ -1067,6 +1068,6 @@ function Library:Window(args)
 	return This
 end
 
-return Library
+print("This is version 1.0.8")
 
---This is version 1.0.8
+return Library
