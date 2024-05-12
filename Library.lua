@@ -712,9 +712,9 @@ function Library:Window(args)
 		end)
 
 		for i = duration, 0 do
-			i = i -1
-			NewNotification.MSG.Text = msg.."("..duration..")s"
-			task.wait(1)
+			i = i - 1
+			NewNotification.MSG.Text = msg.."("..i..")s"
+			wait(1)
 		end
 		NewNotification:Destroy()
 	end
@@ -1066,6 +1066,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.1.4")
+print("This is version 1.1.5")
 
 return Library
