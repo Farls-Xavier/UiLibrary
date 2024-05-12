@@ -711,12 +711,9 @@ function Library:Window(args)
 			NewNotification:Destroy()
 		end)
 
-		for i = duration, 0 do
-			i = i - 1
-			NewNotification.MSG.Text = msg.."("..i..")s"
-			wait(1)
-		end
-		NewNotification:Destroy()
+		task.delay(duration, function()
+			NewNotification:Destroy()
+		end)
 	end
 
 	function This:UpdatePlayerList()
@@ -1066,6 +1063,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.1.5")
+print("This is version 1.1.6")
 
 return Library
