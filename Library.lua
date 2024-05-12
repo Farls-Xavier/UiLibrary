@@ -713,17 +713,22 @@ function Library:Window(args)
 			Scrap = true
 			NewNotification:Destroy()
 		end)
-
-		for i = duration, 0, -1 do
-			if Scrap == false then
-				NewNotification.MSG.Text = msg.."("..i..")s"
-				wait(1)	
+		
+		local cw = coroutine.create(function()
+			for i = duration, 0, -1 do
+				if Scrap == false then
+					NewNotification.MSG.Text = msg.."("..i..")s"
+					wait(1)	
+				end
 			end
-		end
-		if Scrap == false then
-			wait(.1)
-			NewNotification:Destroy()
-		end
+			
+			if Scrap == false then
+				wait(.1)
+				NewNotification:Destroy()
+			end
+		end)
+		
+		coroutine.resume(cw)
 	end
 
 	function This:UpdatePlayerList()
@@ -922,12 +927,13 @@ function Library:Window(args)
 
 			local Toggle = {
 				Hover = false,
-				MouseDown = false
+				MouseDown = false,
+				State = false
 			}
+			
 
 
-
-			return
+			return Toggle
 		end
 
 		function Tab:Slider(args)
@@ -1069,6 +1075,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.0.8")
+print("This is version 1.1.1")
 
 return Library
