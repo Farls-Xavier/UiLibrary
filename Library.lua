@@ -903,6 +903,10 @@ function Library:Window(args)
 				Hover = false,
 				MouseDown = false
 			}
+
+			
+
+			return
 		end
 
 		function Tab:Slider(args)
@@ -932,7 +936,8 @@ function Library:Window(args)
 					local value = math.floor(((args.Max - args.Min) * percentage) + args.Min)
 
 					RenderedSlider.Back.Value.Text = tostring(value)
-					RenderedSlider.Back.Fill.Size = UDim2.fromScale(percentage, 1)
+					TweenService:Create(RenderedSlider.Back.Fill, TweenInfo.new(.1), {Size = UDim2.fromScale(percentage, 1)}):Play()
+					--RenderedSlider.Back.Fill.Size = UDim2.fromScale(percentage, 1)
 				else
 					RenderedSlider.Back.Value.Text = tostring(v)
 					Library:tween(RenderedSlider.Back.Fill, {Size = UDim2.fromScale(((v - args.Min) / (args.Max - args.Min)), 1)})
@@ -1045,4 +1050,4 @@ end
 
 return Library
 
---This is version 1.0.5
+--This is version 1.0.6
