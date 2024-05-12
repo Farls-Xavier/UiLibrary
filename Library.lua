@@ -10,9 +10,9 @@ local Camera = workspace.CurrentCamera
 local Mouse = Player:GetMouse()
 
 local Names = {
-    "MadebyFarls",
-    "ThisIsAOverlappedInstance",
-    "ThisisNOTaOverlappedInstance"
+	"MadebyFarls",
+	"ThisIsAOverlappedInstance",
+	"ThisisNOTaOverlappedInstance"
 }
 local randomName = math.random(1, #Names)
 
@@ -20,6 +20,14 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = Names[randomName]
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+_G.RanThis = false
+
+if _G.RanThis then
+	return
+else
+	_G.RanThis = true
+end
 
 local function MakeDraggable(topbarobject, object)
 	local Dragging = nil
@@ -101,13 +109,10 @@ function Library:Window(args)
 	-- Vars 
 	local This = {
 		CurrentTab = nil,
+		CurrentTabName = nil,
 		SelectedTarget = nil
 	}
 	local Minimized = false
-
-	for _, OverLappedInstance in pairs(Player.PlayerGui:GetChildren()) do
-		
-	end
 
 	-- Instancing
 	local MainFrame = Instance.new("Frame")
@@ -639,23 +644,26 @@ function Library:Window(args)
 			minimizeTween:Play()
 		else
 			for i,v in pairs(MainFrame:GetDescendants()) do
-				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("Folder") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder and v.Parent ~= PlayersList then
+				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("Folder") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder then
 					task.delay(.2, function()
 						v.Visible = true
-						for _,tabs in pairs(Tabholder:GetChildren()) do
-							if tabs ~= This.CurrentTab then
-								tabs.Visible = false
-							else
-								if This.CurrentTab == tabs then
-									tabs.Visible = true
-								end
-							end
-						end
-						
 					end)
 				end
 			end
 			openTween:Play()
+
+			for i,v in pairs(Tabholder:GetChildren()) do
+				task.delay(.2, function()
+					if v.Name == "Template" then
+						v.Visible = false
+					end
+					if v.Name == This.CurrentTabName then
+						v.Visible = true
+					else
+						v.Visible = false
+					end
+				end)
+			end
 		end
 	end)
 
@@ -708,7 +716,7 @@ function Library:Window(args)
 		end
 
 		local Scrap = false
-		
+
 		NewNotification.NotiTopBar.Close.Activated:Connect(function()
 			Scrap = true
 			NewNotification:Destroy()
@@ -809,6 +817,7 @@ function Library:Window(args)
 				Library:tween(Icon, {ImageColor3 = Color3.fromRGB(255, 255, 255)})
 				TabFrame.Visible = true
 
+				This.CurrentTabName = TabFrame.Name
 				This.CurrentTab = Tab
 			end
 		end
@@ -924,7 +933,7 @@ function Library:Window(args)
 				MouseDown = false
 			}
 
-			
+
 
 			return
 		end
@@ -1068,6 +1077,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.0.8")
+print("This is version 1.1.0")
 
 return Library
