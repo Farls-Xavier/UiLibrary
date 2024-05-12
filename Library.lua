@@ -692,7 +692,7 @@ function Library:Window(args)
 	function This:Notification(title, msg, duration)
 		local NewNotification = Notification:Clone()
 		NewNotification.NotiTopBar.TextLabel.Text = title
-		NewNotification.MSG.Text = msg.." ("..duration..")s"
+		NewNotification.MSG.Text = msg.."("..duration..")s"
 		NewNotification.Parent = ScreenGui
 		NewNotification.Visible = true
 
@@ -707,28 +707,13 @@ function Library:Window(args)
 			Library:tween(NewNotification, {BackgroundTransparency = 0})
 		end
 
-		local Scrap = false
-
 		NewNotification.NotiTopBar.Close.Activated:Connect(function()
-			Scrap = true
 			NewNotification:Destroy()
 		end)
-		
-		local cw = coroutine.create(function()
-			for i = duration, 0, -1 do
-				if Scrap == false then
-					NewNotification.MSG.Text = msg.."("..i..")s"
-					wait(1)	
-				end
-			end
-			
-			if Scrap == false then
-				wait(.1)
-				NewNotification:Destroy()
-			end
-		end)
-		
-		coroutine.resume(cw)
+
+		for i = duration, 0, -1 do
+			print(i)
+		end
 	end
 
 	function This:UpdatePlayerList()
@@ -757,6 +742,9 @@ function Library:Window(args)
 
 					for _, label in pairs(List:FindFirstChild("ScrollingFrame").PlayersList:GetChildren()) do
 						if label:IsA("TextButton") and label ~= Cloned then
+							if label.Text == Player.Name or label.Text == Player.DisplayName then
+								label:Destroy()
+							end
 							Library:tween(label, {TextColor3 = Color3.fromRGB(200,200,200)})
 						end
 					end
@@ -1075,6 +1063,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.1.1")
+print("This is a testing version")
 
 return Library
