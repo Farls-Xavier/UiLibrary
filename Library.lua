@@ -19,7 +19,7 @@ ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 for i,v in pairs(Player.PlayerGui:GetDescendants()) do
-	if v.Value == "1" then
+	if v.Value == "1" and not v == ThisReference then
 		v.Parent:Destroy()
 	end
 end
@@ -1069,4 +1069,4 @@ end
 
 return Library
 
---This is version 1.0.7
+--This is version 1.0.8
