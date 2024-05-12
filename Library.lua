@@ -21,14 +21,6 @@ ScreenGui.Name = Names[randomName]
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-_G.RanThis = false
-
-if _G.RanThis then
-	return
-else
-	_G.RanThis = true
-end
-
 local function MakeDraggable(topbarobject, object)
 	local Dragging = nil
 	local DragInput = nil
@@ -1077,6 +1069,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.1.0")
+print("This is version 1.0.8")
 
 return Library
