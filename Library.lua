@@ -706,9 +706,9 @@ function Library:Window(args)
 	end
 
 	function This:UpdatePlayerList()
-		local toClone = List.ScrollingFrame.PlayersList.TemplatePlayerLabel
+		local toClone = List:FindFirstChild("ScrollingFrame").PlayersList.TemplatePlayerLabel
 
-		for i,v in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
+		for i,v in pairs(List:FindFirstChild("ScrollingFrame").PlayersList:GetChildren()) do
 			if v:IsA("TextButton") and v.Name ~= "TemplatePlayerLabel" then
 				v:Destroy()
 			end
@@ -718,7 +718,7 @@ function Library:Window(args)
 			if player ~= Player then
 				local Cloned = toClone:Clone()
 				Cloned.Visible = true
-				Cloned.Parent = List.ScrollingFrame.PlayersList
+				Cloned.Parent = List:FindFirstChild("ScrollingFrame").PlayersList
 				if string.len(player.DisplayName) > 20 then
 					Cloned:Destroy()
 				end
@@ -729,7 +729,7 @@ function Library:Window(args)
 					This.SelectedTarget = Cloned.Name
 					Library:tween(Cloned, {TextColor3 = Color3.fromRGB(255,255,255)})
 
-					for _, label in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
+					for _, label in pairs(List:FindFirstChild("ScrollingFrame").PlayersList:GetChildren()) do
 						if label:IsA("TextButton") and label ~= Cloned then
 							Library:tween(label, {TextColor3 = Color3.fromRGB(200,200,200)})
 						end
@@ -1043,3 +1043,5 @@ function Library:Window(args)
 end
 
 return Library
+
+--This is version 1.0.4
