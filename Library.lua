@@ -11,9 +11,18 @@ local ViewportSize = Camera.ViewportSize
 local Mouse = Player:GetMouse()
 
 local ScreenGui = Instance.new("ScreenGui")
+local ThisReference = Instance.new("StringValue", ScreenGui)
+ThisReference.Name = "UiReference"
+ThisReference.Value = "1"
 ScreenGui.Name = "ScreenGui"
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+for i,v in pairs(Player.PlayerGui:GetDescendants()) do
+	if v.Value == "1" then
+		v.Parent:Destroy()
+	end
+end
 
 local function MakeDraggable(topbarobject, object)
 	local Dragging = nil
@@ -632,6 +641,16 @@ function Library:Window(args)
 				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("Folder") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder and v.Parent ~= PlayersList then
 					task.delay(.2, function()
 						v.Visible = true
+						for _,tabs in pairs(Tabholder:GetChildren()) do
+							if tabs ~= This.CurrentTab then
+								tabs.Visible = false
+							else
+								if This.CurrentTab == tabs then
+									tabs.Visible = true
+								end
+							end
+						end
+						
 					end)
 				end
 			end
@@ -1050,4 +1069,4 @@ end
 
 return Library
 
---This is version 1.0.6
+--This is version 1.0.7
