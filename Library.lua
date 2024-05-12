@@ -302,6 +302,7 @@ function Library:Window(args)
 	Template.BorderSizePixel = 0
 	Template.Size = UDim2.new(1, 0, 1, 0)
 	Template.Visible = false
+	Template.ScrollBarImageTransparency = 1
 	Template.ScrollBarThickness = 2
 
 	TabListLayout.Name = "TabListLayout"
@@ -1044,4 +1045,4 @@ end
 
 return Library
 
---This is version 1.0.4
+--This is version 1.0.5
