@@ -6,6 +6,8 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 
 local Player = game:GetService("Players").LocalPlayer
+local Camera = workspace.CurrentCamera
+local ViewportSize = Camera.ViewportSize
 local Mouse = Player:GetMouse()
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -124,7 +126,16 @@ function Library:Window(args)
 	local TemplateLabel = Instance.new("Frame")
 	local LabelUICorner = Instance.new("UICorner")
 	local Label = Instance.new("TextLabel")
-	local UIListLayout_2 = Instance.new("UIListLayout")
+	local TabListLayout = Instance.new("UIListLayout")
+	local TemplateSlider = Instance.new("Frame")
+	local SliderUiCorner = Instance.new("UICorner")
+	local Back = Instance.new("Frame")
+	local UiCorner5 = Instance.new("UICorner")
+	local Fill = Instance.new("Frame")
+	local UiCorner5_2 = Instance.new("UICorner")
+	local SliderName = Instance.new("TextLabel")
+	local Value = Instance.new("TextBox")
+	local UiCorner6 = Instance.new("UICorner")
 	local List = Instance.new("Frame")
 	local ListUiCorner = Instance.new("UICorner")
 	local GotoButton = Instance.new("TextButton")
@@ -133,8 +144,15 @@ function Library:Window(args)
 	local SpectateButtonUICorner = Instance.new("UICorner")
 	local ScrollingFrame = Instance.new("ScrollingFrame")
 	local PlayersList = Instance.new("Folder")
-	local UIListLayout_3 = Instance.new("UIListLayout")
+	local UIListLayout_2 = Instance.new("UIListLayout")
 	local TemplatePlayerLabel = Instance.new("TextButton")
+	local Notification = Instance.new("Frame")
+	local NotiTopBar = Instance.new("Frame")
+	local TextLabel = Instance.new("TextLabel")
+	local Close = Instance.new("TextButton")
+	local DropShadowHolder_2 = Instance.new("Frame")
+	local DropShadow_2 = Instance.new("ImageLabel")
+	local MSG = Instance.new("TextLabel")
 
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = ScreenGui
@@ -286,6 +304,11 @@ function Library:Window(args)
 	Template.Visible = false
 	Template.ScrollBarThickness = 2
 
+	TabListLayout.Name = "TabListLayout"
+	TabListLayout.Parent = Template
+	TabListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	TabListLayout.Padding = UDim.new(0, 5)
+
 	TemplateButton.Name = "TemplateButton"
 	TemplateButton.Parent = Template
 	TemplateButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -368,6 +391,87 @@ function Library:Window(args)
 	ListUiCorner.Name = "ListUiCorner"
 	ListUiCorner.Parent = List
 
+	TemplateSlider.Name = "TemplateSlider"
+	TemplateSlider.Parent = Template
+	TemplateSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	TemplateSlider.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TemplateSlider.BorderSizePixel = 0
+	TemplateSlider.Size = UDim2.new(0, 195, 0, 46)
+	TemplateSlider.Visible = false
+
+	SliderUiCorner.CornerRadius = UDim.new(0, 2)
+	SliderUiCorner.Name = "SliderUiCorner"
+	SliderUiCorner.Parent = TemplateSlider
+
+	Back.Name = "Back"
+	Back.Parent = TemplateSlider
+	Back.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
+	Back.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Back.BorderSizePixel = 0
+	Back.Position = UDim2.new(0.0358974375, 0, 0.5, 0)
+	Back.Size = UDim2.new(0, 154, 0, 13)
+
+	UiCorner5.CornerRadius = UDim.new(0, 2)
+	UiCorner5.Name = "UiCorner5"
+	UiCorner5.Parent = Back
+
+	Fill.Name = "Fill"
+	Fill.Parent = Back
+	Fill.AnchorPoint = Vector2.new(0, 0.5)
+	Fill.BackgroundColor3 = Color3.fromRGB(22, 17, 27)
+	Fill.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Fill.BorderSizePixel = 0
+	Fill.Position = UDim2.new(0, 0, 0.5, 0)
+	Fill.Size = UDim2.new(0, 60, 0, 13)
+
+	UiCorner5_2.CornerRadius = UDim.new(0, 2)
+	UiCorner5_2.Name = "UiCorner5"
+	UiCorner5_2.Parent = Fill
+
+	SliderName.Name = "SliderName"
+	SliderName.Parent = Back
+	SliderName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SliderName.BackgroundTransparency = 1.000
+	SliderName.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	SliderName.BorderSizePixel = 0
+	SliderName.Position = UDim2.new(0, 0, -1.38461542, 0)
+	SliderName.Size = UDim2.new(0, 119, 0, 15)
+	SliderName.Font = Enum.Font.Gotham
+	SliderName.Text = "Slider"
+	SliderName.TextColor3 = Color3.fromRGB(200, 200, 200)
+	SliderName.TextSize = 14.000
+	SliderName.TextXAlignment = Enum.TextXAlignment.Left
+
+	Value.Name = "Value"
+	Value.Parent = Back
+	Value.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	Value.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Value.BorderSizePixel = 0
+	Value.Position = UDim2.new(1.02999997, 0, 0, 0)
+	Value.Size = UDim2.new(0, 27, 0, 13)
+	Value.Font = Enum.Font.Gotham
+	Value.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
+	Value.Text = "100"
+	Value.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Value.TextSize = 12.000
+	Value.TextWrapped = true
+
+	UiCorner6.CornerRadius = UDim.new(0, 2)
+	UiCorner6.Name = "UiCorner6"
+	UiCorner6.Parent = Value
+
+	List.Name = "List"
+	List.Parent = MainFrame
+	List.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+	List.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	List.BorderSizePixel = 0
+	List.Position = UDim2.new(0.775700927, 0, 0.0939393938, 0)
+	List.Size = UDim2.new(0, 113, 0, 215)
+
+	ListUiCorner.CornerRadius = UDim.new(0, 2)
+	ListUiCorner.Name = "ListUiCorner"
+	ListUiCorner.Parent = List
+
 	GotoButton.Name = "GotoButton"
 	GotoButton.Parent = List
 	GotoButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -415,10 +519,6 @@ function Library:Window(args)
 	UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout_2.Padding = UDim.new(0, 1)
 
-	UIListLayout_3.Parent = Template
-	UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout_3.Padding = UDim.new(0, 5)
-
 	TemplatePlayerLabel.Name = "TemplatePlayerLabel"
 	TemplatePlayerLabel.Parent = PlayersList
 	TemplatePlayerLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -432,6 +532,91 @@ function Library:Window(args)
 	TemplatePlayerLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
 	TemplatePlayerLabel.TextSize = 12.000
 
+	Notification.Name = "Notification"
+	Notification.Parent = ScreenGui
+	Notification.AnchorPoint = Vector2.new(0, 1)
+	Notification.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	Notification.BackgroundTransparency = 1.000
+	Notification.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Notification.BorderSizePixel = 0
+	Notification.Position = UDim2.new(0, 0, 1, 0)
+	Notification.Size = UDim2.new(0, 201, 0, 88)
+	Notification.Visible = false
+
+	NotiTopBar.Name = "NotiTopBar"
+	NotiTopBar.Parent = Notification
+	NotiTopBar.BackgroundColor3 = Color3.fromRGB(34, 27, 42)
+	NotiTopBar.BackgroundTransparency = 1.000
+	NotiTopBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	NotiTopBar.BorderSizePixel = 0
+	NotiTopBar.Position = UDim2.new(-0.00100943341, 0, -0.0102747139, 0)
+	NotiTopBar.Size = UDim2.new(0, 201, 0, 29)
+
+	TextLabel.Parent = NotiTopBar
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.BorderSizePixel = 0
+	TextLabel.Position = UDim2.new(0.0153321987, 0, 0, 0)
+	TextLabel.Size = UDim2.new(0, 197, 0, 29)
+	TextLabel.Font = Enum.Font.Gotham
+	TextLabel.Text = "Notification"
+	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.TextSize = 20.000
+	TextLabel.TextTransparency = 1.000
+	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+	Close.Name = "Close"
+	Close.Parent = NotiTopBar
+	Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Close.BackgroundTransparency = 1.000
+	Close.BorderColor3 = Color3.fromRGB(255, 255, 255)
+	Close.BorderSizePixel = 0
+	Close.Position = UDim2.new(0.779538155, 0, -0.137931034, 0)
+	Close.Size = UDim2.new(0, 43, 0, 36)
+	Close.Font = Enum.Font.SourceSansBold
+	Close.Text = "X"
+	Close.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Close.TextSize = 23.000
+	Close.TextTransparency = 1.000
+	Close.TextWrapped = true
+
+	DropShadowHolder_2.Name = "DropShadowHolder"
+	DropShadowHolder_2.Parent = NotiTopBar
+	DropShadowHolder_2.BackgroundTransparency = 1.000
+	DropShadowHolder_2.BorderSizePixel = 0
+	DropShadowHolder_2.Size = UDim2.new(1, 0, 1, 0)
+	DropShadowHolder_2.ZIndex = 0
+
+	DropShadow_2.Name = "DropShadow"
+	DropShadow_2.Parent = DropShadowHolder_2
+	DropShadow_2.AnchorPoint = Vector2.new(0.5, 0.5)
+	DropShadow_2.BackgroundTransparency = 1.000
+	DropShadow_2.BorderSizePixel = 0
+	DropShadow_2.Position = UDim2.new(0.5, 0, 0.5, 0)
+	DropShadow_2.Size = UDim2.new(1, 47, 1, 47)
+	DropShadow_2.ZIndex = 0
+	DropShadow_2.Image = "rbxassetid://6014261993"
+	DropShadow_2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	DropShadow_2.ImageTransparency = 0.500
+	DropShadow_2.ScaleType = Enum.ScaleType.Slice
+	DropShadow_2.SliceCenter = Rect.new(49, 49, 450, 450)
+
+	MSG.Name = "MSG"
+	MSG.Parent = Notification
+	MSG.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MSG.BackgroundTransparency = 1.000
+	MSG.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	MSG.BorderSizePixel = 0
+	MSG.Position = UDim2.new(0.00497512426, 0, 0.353361636, 0)
+	MSG.Size = UDim2.new(0, 200, 0, 56)
+	MSG.Font = Enum.Font.Gotham
+	MSG.Text = "Nil (0s)"
+	MSG.TextColor3 = Color3.fromRGB(255, 255, 255)
+	MSG.TextSize = 16.000
+	MSG.TextTransparency = 1.000
+	MSG.TextWrapped = true
+
 	MinimizeButton.Activated:Connect(function()
 		Minimized = not Minimized
 		if Minimized then
@@ -444,9 +629,9 @@ function Library:Window(args)
 		else
 			for i,v in pairs(MainFrame:GetDescendants()) do
 				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("Folder") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder and v.Parent ~= PlayersList then
-                    task.delay(.2, function()
-                        v.Visible = true
-                    end)
+					task.delay(.2, function()
+						v.Visible = true
+					end)
 				end
 			end
 			openTween:Play()
@@ -483,40 +668,77 @@ function Library:Window(args)
 
 	MakeDraggable(Topbar, MainFrame)
 
+	function This:Notification(title, msg, duration)
+		local NewNotification = Notification:Clone()
+		NewNotification.NotiTopBar.TextLabel.Text = title
+		NewNotification.MSG.Text = msg.." ("..duration..")s"
+		NewNotification.Parent = ScreenGui
+		NewNotification.Visible = true
+
+		for _,v in pairs(NewNotification:GetDescendants()) do
+			if v:IsA("ImageLabel") then
+				Library:tween(v, {ImageTransparency = 0.5})
+			elseif v:IsA("TextLabel") or v:IsA("TextButton") then
+				Library:tween(v, {TextTransparency = 0})
+			elseif v:IsA("Frame") and v.Name ~= "DropShadowHolder" then
+				Library:tween(v, {BackgroundTransparency = 0})
+			end
+			Library:tween(NewNotification, {BackgroundTransparency = 0})
+		end
+
+		local Scrap = false
+		
+		NewNotification.NotiTopBar.Close.Activated:Connect(function()
+			Scrap = true
+			NewNotification:Destroy()
+		end)
+
+		for i = duration, 0, -1 do
+			if Scrap == false then
+				NewNotification.MSG.Text = msg.."("..i..")s"
+				wait(1)	
+			end
+		end
+		if Scrap == false then
+			wait(.1)
+			NewNotification:Destroy()
+		end
+	end
+
 	function This:UpdatePlayerList()
-        local toClone = List.ScrollingFrame.PlayersList.TemplatePlayerLabel
+		local toClone = List.ScrollingFrame.PlayersList.TemplatePlayerLabel
 
-        for i,v in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
-            if v:IsA("TextButton") and v.Name ~= "TemplatePlayerLabel" then
-                v:Destroy()
-            end
-        end
+		for i,v in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
+			if v:IsA("TextButton") and v.Name ~= "TemplatePlayerLabel" then
+				v:Destroy()
+			end
+		end
 
-        for _, player in pairs(Players:GetPlayers()) do
-            if player ~= Player then
-                local Cloned = toClone:Clone()
-                Cloned.Visible = true
-                Cloned.Parent = List.ScrollingFrame.PlayersList
-                if string.len(player.DisplayName) > 20 then
-                    Cloned:Destroy()
-                end
-                Cloned.Text = player.DisplayName
-                Cloned.Name = player.Name
-    
-                Cloned.MouseButton1Click:Connect(function()
-                    This.SelectedTarget = Cloned.Name
-                    Library:tween(Cloned, {TextColor3 = Color3.fromRGB(255,255,255)})
+		for _, player in pairs(Players:GetPlayers()) do
+			if player ~= Player then
+				local Cloned = toClone:Clone()
+				Cloned.Visible = true
+				Cloned.Parent = List.ScrollingFrame.PlayersList
+				if string.len(player.DisplayName) > 20 then
+					Cloned:Destroy()
+				end
+				Cloned.Text = player.DisplayName
+				Cloned.Name = player.Name
 
-                    for _, label in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
-                        if label:IsA("TextButton") and label ~= Cloned then
-                            Library:tween(label, {TextColor3 = Color3.fromRGB(200,200,200)})
-                        end
-                    end
-                end)
-            end
-        end
-    end
-    
+				Cloned.MouseButton1Click:Connect(function()
+					This.SelectedTarget = Cloned.Name
+					Library:tween(Cloned, {TextColor3 = Color3.fromRGB(255,255,255)})
+
+					for _, label in pairs(List.ScrollingFrame.PlayersList:GetChildren()) do
+						if label:IsA("TextButton") and label ~= Cloned then
+							Library:tween(label, {TextColor3 = Color3.fromRGB(200,200,200)})
+						end
+					end
+				end)
+			end
+		end
+	end
+
 	This:UpdatePlayerList()
 
 	Players.PlayerAdded:Connect(function() This:UpdatePlayerList() end)
@@ -670,6 +892,114 @@ function Library:Window(args)
 			return Button
 		end
 
+		function Tab:Toggle(args)
+			args = Library:Validate({
+				Text = "Toggle",
+				Callback = function() end
+			}, args or {})
+
+			local Toggle = {
+				Hover = false,
+				MouseDown = false
+			}
+		end
+
+		function Tab:Slider(args)
+			args = Library:Validate({
+				Text = "Slider",
+				Min = 0,
+				Max = 100,
+				Default = 50,
+				Callback = function(v) print(v) end
+			}, args or {})
+
+			local Slider = {
+				Hover = false,
+				MouseDown = false,
+				Connection = nil
+			}
+
+			local RenderedSlider = TemplateSlider:Clone()
+			RenderedSlider.Back.SliderName.Text = args.Text
+			RenderedSlider.Back.Value.Text = args.Default
+			RenderedSlider.Parent = TabFrame
+			RenderedSlider.Visible = true
+
+			function Slider:SetValue(v)
+				if v == nil then
+					local percentage = math.clamp((Mouse.X - RenderedSlider.Back.AbsolutePosition.X) / (RenderedSlider.Back.AbsoluteSize.X), 0, 1)
+					local value = math.floor(((args.Max - args.Min) * percentage) + args.Min)
+
+					RenderedSlider.Back.Value.Text = tostring(value)
+					RenderedSlider.Back.Fill.Size = UDim2.fromScale(percentage, 1)
+				else
+					RenderedSlider.Back.Value.Text = tostring(v)
+					Library:tween(RenderedSlider.Back.Fill, {Size = UDim2.fromScale(((v - args.Min) / (args.Max - args.Min)), 1)})
+				end
+				args.Callback(Slider:GetValue())
+			end
+
+			function Slider:GetValue()
+				return tonumber(RenderedSlider.Back.Value.Text)
+			end
+
+			Slider:SetValue(args.Default)
+
+			RenderedSlider.Back.MouseEnter:Connect(function()
+				Slider.Hover = true
+
+				Library:tween(RenderedSlider.Back.Fill, {BackgroundColor3 = Color3.fromRGB(46, 35, 56)})
+			end)
+
+			RenderedSlider.Back.MouseLeave:Connect(function()
+				Slider.Hover = false
+
+				if not Slider.MouseDown then
+					Library:tween(RenderedSlider.Back.Fill, {BackgroundColor3 = Color3.fromRGB(22, 17, 27)})
+				end
+			end)
+
+			RenderedSlider.MouseEnter:Connect(function()
+				Library:tween(RenderedSlider.Back.SliderName, {TextColor3 = Color3.fromRGB(255, 255, 255)})
+			end)
+
+			RenderedSlider.MouseLeave:Connect(function()
+				Library:tween(RenderedSlider.Back.SliderName, {TextColor3 = Color3.fromRGB(200, 200, 200)})
+			end)
+
+			UserInputService.InputBegan:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 and Slider.Hover then
+					Slider.MouseDown = true
+
+					if not Slider.Connection then
+						Slider.Connection = RunService.RenderStepped:Connect(function()
+							Slider:SetValue()
+						end)
+					end
+				end
+			end)
+
+			UserInputService.InputEnded:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					Slider.MouseDown = false
+
+					if Slider.Connection then Slider.Connection:Disconnect() end
+					Slider.Connection = nil
+				end
+			end)
+
+			RenderedSlider.Back.Value.FocusLost:Connect(function(e)
+				local clampedValue = math.clamp(RenderedSlider.Back.Value.Text, args.Min, args.Max)
+				local percentage = (clampedValue - args.Min) / (args.Max - args.Min)
+
+				Library:tween(RenderedSlider.Back.Fill, {Size = UDim2.fromScale(percentage, 1)})
+
+				args.Callback(Slider:GetValue())
+			end)			
+
+			return Slider
+		end
+
 		function Tab:Label(args)
 			args = Library:Validate({
 				Text = "  Label",
@@ -713,4 +1043,3 @@ function Library:Window(args)
 end
 
 return Library
---GLIGGER KING VERSIOn 1231
