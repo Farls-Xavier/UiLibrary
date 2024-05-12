@@ -711,9 +711,14 @@ function Library:Window(args)
 			NewNotification:Destroy()
 		end)
 
-		for i = duration, 0, -1 do
-			print(i)
-		end
+		local co = coroutine.create(function()
+			for i = duration, 0, -1 do
+				NewNotification.MSG.Text = msg.."("..duration..")s"
+				wait(1)
+			end
+			NewNotification:Destroy()
+		end)
+		coroutine.resume(co)
 	end
 
 	function This:UpdatePlayerList()
@@ -1063,6 +1068,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is a testing version")
+print("This is version 1.1.2")
 
 return Library
