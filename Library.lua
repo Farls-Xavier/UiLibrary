@@ -9,6 +9,12 @@ local Player = game:GetService("Players").LocalPlayer
 local Camera = workspace.CurrentCamera
 local Mouse = Player:GetMouse()
 
+if _G.RanThisScript then
+	return
+end
+
+_G.RanThisScript = true
+
 local Names = {
 	"MadebyFarls",
 	"ThisIsAOverlappedInstance",
@@ -696,6 +702,8 @@ function Library:Window(args)
 		NewNotification.Parent = ScreenGui
 		NewNotification.Visible = true
 
+		local val = duration
+
 		for _,v in pairs(NewNotification:GetDescendants()) do
 			if v:IsA("ImageLabel") then
 				Library:tween(v, {ImageTransparency = 0.5})
@@ -711,9 +719,16 @@ function Library:Window(args)
 			NewNotification:Destroy()
 		end)
 
-		task.delay(duration, function()
-			NewNotification:Destroy()
-		end)
+		coroutine.resume(coroutine.create(function()
+			while wait(1) do
+				if val ~= 0 then
+					val = val - 1
+					NewNotification.MSG.Text = msg.."("..val..")s"
+				else
+					NewNotification:Destroy()
+				end
+			end
+		end))
 	end
 
 	function This:UpdatePlayerList()
@@ -1063,6 +1078,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.1.6")
+print("This is version 1.1.7")
 
 return Library
