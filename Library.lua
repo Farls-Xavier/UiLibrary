@@ -20,6 +20,7 @@ local Names = {
 	"ThisIsAOverlappedInstance",
 	"ThisisNOTaOverlappedInstance"
 }
+
 local randomName = math.random(1, #Names)
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -130,12 +131,6 @@ function Library:Window(args)
 	local DropShadow = Instance.new("ImageLabel")
 	local Tabholder = Instance.new("Frame")
 	local Template = Instance.new("ScrollingFrame")
-	local TemplateButton = Instance.new("Frame")
-	local ButtonUICorner = Instance.new("UICorner")
-	local Detection = Instance.new("TextButton")
-	local DetectionUICorner = Instance.new("UICorner")
-	local ButtonImage = Instance.new("ImageLabel")
-	local ButtonImageUiCorner = Instance.new("UICorner")
 	local TemplateLabel = Instance.new("Frame")
 	local LabelUICorner = Instance.new("UICorner")
 	local Label = Instance.new("TextLabel")
@@ -149,6 +144,18 @@ function Library:Window(args)
 	local SliderName = Instance.new("TextLabel")
 	local Value = Instance.new("TextBox")
 	local UiCorner6 = Instance.new("UICorner")
+	local TemplateToggle = Instance.new("Frame")
+	local ToggleUICorner = Instance.new("UICorner")
+	local ToggleDetection = Instance.new("TextButton")
+	local ToggleDetectionUICorner = Instance.new("UICorner")
+	local Toggler = Instance.new("ImageLabel")
+	local TogglerUICorner = Instance.new("UICorner")
+	local TemplateButton = Instance.new("Frame")
+	local ButtonUICorner = Instance.new("UICorner")
+	local Detection = Instance.new("TextButton")
+	local DetectionUICorner = Instance.new("UICorner")
+	local ButtonImage = Instance.new("ImageLabel")
+	local ButtonImageUiCorner = Instance.new("UICorner")
 	local List = Instance.new("Frame")
 	local ListUiCorner = Instance.new("UICorner")
 	local GotoButton = Instance.new("TextButton")
@@ -166,6 +173,7 @@ function Library:Window(args)
 	local DropShadowHolder_2 = Instance.new("Frame")
 	local DropShadow_2 = Instance.new("ImageLabel")
 	local MSG = Instance.new("TextLabel")
+
 
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = ScreenGui
@@ -631,6 +639,49 @@ function Library:Window(args)
 	MSG.TextTransparency = 1.000
 	MSG.TextWrapped = true
 
+	TemplateToggle.Name = "TemplateToggle"
+	TemplateToggle.Parent = Template
+	TemplateToggle.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	TemplateToggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TemplateToggle.BorderSizePixel = 0
+	TemplateToggle.Size = UDim2.new(0, 195, 0, 30)
+	TemplateToggle.Visible = false
+
+	ToggleUICorner.CornerRadius = UDim.new(0, 2)
+	ToggleUICorner.Name = "ToggleUICorner"
+	ToggleUICorner.Parent = TemplateToggle
+
+	ToggleDetection.Name = "ToggleDetection"
+	ToggleDetection.Parent = TemplateToggle
+	ToggleDetection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ToggleDetection.BackgroundTransparency = 1.000
+	ToggleDetection.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ToggleDetection.BorderSizePixel = 0
+	ToggleDetection.Size = UDim2.new(1, 0, 1, 0)
+	ToggleDetection.Font = Enum.Font.Gotham
+	ToggleDetection.Text = "  Toggle"
+	ToggleDetection.TextColor3 = Color3.fromRGB(200, 200, 200)
+	ToggleDetection.TextSize = 14.000
+	ToggleDetection.TextXAlignment = Enum.TextXAlignment.Left
+
+	ToggleDetectionUICorner.CornerRadius = UDim.new(0, 2)
+	ToggleDetectionUICorner.Name = "ToggleDetectionUICorner"
+	ToggleDetectionUICorner.Parent = ToggleDetection
+
+	Toggler.Name = "Toggler"
+	Toggler.Parent = TemplateToggle
+	Toggler.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+	Toggler.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Toggler.BorderSizePixel = 0
+	Toggler.Position = UDim2.new(0.866999984, 0, 0.166999996, 0)
+	Toggler.Size = UDim2.new(0, 20, 0, 20)
+	Toggler.Image = "rbxassetid://13846852950"
+	Toggler.ImageTransparency = 1.000
+
+	TogglerUICorner.CornerRadius = UDim.new(0, 2)
+	TogglerUICorner.Name = "TogglerUICorner"
+	TogglerUICorner.Parent = Toggler
+
 	MinimizeButton.Activated:Connect(function()
 		Minimized = not Minimized
 		if Minimized then
@@ -934,8 +985,60 @@ function Library:Window(args)
 				MouseDown = false,
 				State = false
 			}
-			
 
+			local RenderedToggle = TemplateToggle:Clone()
+			RenderedToggle.Visible = true
+			RenderedToggle.Parent = TabFrame
+			local Visual = RenderedToggle.ToggleDetection
+			Visual.Text = "  "..args.Text
+
+			function Toggle:Toggle(v)
+				if v == nil then
+					Toggle.State = not Toggle.State
+				else
+					Toggle = v
+				end
+
+				if Toggle.State then
+					Library:tween(RenderedToggle.Toggler, {ImageTransparency = 0})
+				else
+					Library:tween(RenderedToggle.Toggler, {ImageTransparency = 1})
+				end
+
+				args.Callback(Toggle.State)
+			end
+
+			RenderedToggle.MouseEnter:Connect(function()
+				Toggle.Hover = true
+
+				Library:tween(RenderedToggle, {BackgroundColor3 = Color3.fromRGB(55, 55, 55)})
+				Library:tween(RenderedToggle.Toggler, {BackgroundColor3 = Color3.fromRGB(68, 68, 68)})
+				Library:tween(Visual, {TextColor3 = Color3.fromRGB(255, 255, 255)})
+			end)
+
+			RenderedToggle.MouseLeave:Connect(function()
+				Toggle.Hover = false
+
+				if not Toggle.MouseDown then
+					Library:tween(RenderedToggle, {BackgroundColor3 = Color3.fromRGB(50, 50, 50)})
+					Library:tween(RenderedToggle.Toggler, {BackgroundColor3 = Color3.fromRGB(63, 63, 63)})
+					Library:tween(Visual, {TextColor3 = Color3.fromRGB(200, 200, 200)})
+				end
+			end)
+
+			UserInputService.InputBegan:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 and Toggle.Hover then
+					Toggle.MouseDown = true
+
+					Toggle:Toggle()
+				end
+			end)
+
+			UserInputService.InputEnded:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					Toggle.MouseDown = false
+				end
+			end)
 
 			return Toggle
 		end
@@ -1079,6 +1182,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.1.8")
+print("This is version 1.2.0")
 
 return Library
