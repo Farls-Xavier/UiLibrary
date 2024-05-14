@@ -666,6 +666,7 @@ function Library:Window(args)
 	end)
 
 	CloseButton.Activated:Connect(function()
+		_G.RanThisScript = false
 		for i,v in pairs(MainFrame:GetDescendants()) do
 			if v.Parent == Topbar then
 				v:Destroy()
@@ -1078,6 +1079,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.1.7")
+print("This is version 1.1.8")
 
 return Library
