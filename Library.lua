@@ -24,6 +24,7 @@ local Names = {
 local randomName = math.random(1, #Names)
 
 local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.ResetOnSpawn = false
 ScreenGui.Name = Names[randomName]
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
