@@ -1057,38 +1057,31 @@ function Library:Window(args)
 			RenderedSlider.Parent = TabFrame
 			RenderedSlider.Visible = true
 
-			if args.decimals == false then
-				function Slider:SetValue(v)
-					if v == nil then
-						local percentage = math.clamp((Mouse.X - RenderedSlider.Back.AbsolutePosition.X) / (RenderedSlider.Back.AbsoluteSize.X), 0, 1)
-						local value = math.floor(((args.Max - args.Min) * percentage) + args.Min)
-	
+			function Slider:SetValue(v)
+				if v == nil then
+					local percentage = math.clamp((Mouse.X - RenderedSlider.Back.AbsolutePosition.X) / (RenderedSlider.Back.AbsoluteSize.X), 0, 1)
+					local value = math.floor(((args.Max - args.Min) * percentage) + args.Min)
+
+					if args.decimals == false then
 						RenderedSlider.Back.Value.Text = tostring(value)
 						TweenService:Create(RenderedSlider.Back.Fill, TweenInfo.new(.1), {Size = UDim2.fromScale(percentage, 1)}):Play()
-						--RenderedSlider.Back.Fill.Size = UDim2.fromScale(percentage, 1)
 					else
-						RenderedSlider.Back.Value.Text = tostring(math.floor(v))
-						Library:tween(RenderedSlider.Back.Fill, {Size = UDim2.fromScale(((v - args.Min) / (args.Max - args.Min)), 1)})
-					end
-					args.Callback(Slider:GetValue())
-				end
-
-			else
-				function Slider:SetValue(v)
-					if v == nil then
-						local percentage = math.clamp((Mouse.X - RenderedSlider.Back.AbsolutePosition.X) / (RenderedSlider.Back.AbsoluteSize.X), 0, 1)
-						local value = args.Min + (args.Max - args.Min) * percentage
-			
 						RenderedSlider.Back.Value.Text = string.format("%.2f", value)
 						TweenService:Create(RenderedSlider.Back.Fill, TweenInfo.new(.1), {Size = UDim2.fromScale(percentage, 1)}):Play()
+					end
+					--RenderedSlider.Back.Fill.Size = UDim2.fromScale(percentage, 1)
+				else
+					if args.decimals == false then
+						RenderedSlider.Back.Value.Text = tostring(math.floor(v))
+						Library:tween(RenderedSlider.Back.Fill, {Size = UDim2.fromScale(((v - args.Min) / (args.Max - args.Min)), 1)})
 					else
 						RenderedSlider.Back.Value.Text = string.format("%.2f", v)
 						Library:tween(RenderedSlider.Back.Fill, {Size = UDim2.fromScale((v - args.Min) / (args.Max - args.Min), 1)})
 					end
-					args.Callback(Slider:GetValue())
 				end
+				args.Callback(Slider:GetValue())
 			end
-
+				
 			function Slider:GetValue()
 				return tonumber(RenderedSlider.Back.Value.Text)
 			end
@@ -1192,6 +1185,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.2.8")
+print("This is version 1.3.0")
 
 return Library
