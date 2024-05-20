@@ -9,23 +9,14 @@ local Player = game:GetService("Players").LocalPlayer
 local Camera = workspace.CurrentCamera
 local Mouse = Player:GetMouse()
 
+--Detect Existing instance
 if _G.RanThisScript then
 	return
 end
-
 _G.RanThisScript = true
-
-local Names = {
-	"MadebyFarls",
-	"ThisIsAOverlappedInstance",
-	"ThisisNOTaOverlappedInstance"
-}
-
-local randomName = math.random(1, #Names)
 
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.ResetOnSpawn = false
-ScreenGui.Name = Names[randomName]
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -1074,7 +1065,11 @@ function Library:Window(args)
 					TweenService:Create(RenderedSlider.Back.Fill, TweenInfo.new(.1), {Size = UDim2.fromScale(percentage, 1)}):Play()
 					--RenderedSlider.Back.Fill.Size = UDim2.fromScale(percentage, 1)
 				else
-					RenderedSlider.Back.Value.Text = tostring(v)
+					if v >= 1 then
+						RenderedSlider.Back.Value.Text = tostring(math.floor(v))
+					else
+						RenderedSlider.Back.Value.Text = string.format("%.2f", v)
+					end
 					Library:tween(RenderedSlider.Back.Fill, {Size = UDim2.fromScale(((v - args.Min) / (args.Max - args.Min)), 1)})
 				end
 				args.Callback(Slider:GetValue())
@@ -1183,6 +1178,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.2.0")
+print("This is version 1.2.5")
 
 return Library
