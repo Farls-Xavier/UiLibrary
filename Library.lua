@@ -1061,12 +1061,13 @@ function Library:Window(args)
 				if v == nil then
 					local percentage = math.clamp((Mouse.X - RenderedSlider.Back.AbsolutePosition.X) / (RenderedSlider.Back.AbsoluteSize.X), 0, 1)
 					local value = math.floor(((args.Max - args.Min) * percentage) + args.Min)
+					local value2 = ((args.Max - args.Min) * percentage) + args.Min
 
 					if args.decimals == false then
 						RenderedSlider.Back.Value.Text = tostring(value)
 						TweenService:Create(RenderedSlider.Back.Fill, TweenInfo.new(.1), {Size = UDim2.fromScale(percentage, 1)}):Play()
 					else
-						RenderedSlider.Back.Value.Text = string.format("%.2f", value)
+						RenderedSlider.Back.Value.Text = string.format("%.2f", value2)
 						TweenService:Create(RenderedSlider.Back.Fill, TweenInfo.new(.1), {Size = UDim2.fromScale(percentage, 1)}):Play()
 					end
 					--RenderedSlider.Back.Fill.Size = UDim2.fromScale(percentage, 1)
@@ -1185,6 +1186,6 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.3.0")
+print("This is version 1.3.1")
 
 return Library
