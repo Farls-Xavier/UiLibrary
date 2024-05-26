@@ -1188,26 +1188,28 @@ function Library:Window(args)
 	return This
 end
 
---[[local currentVer = "1.4.0"
-if isfolder("FarlsXavier") then
-	if not isfile("FarlsXavier\\currentVersion.ver") then
-		writefile("FarlsXavier\\currentVersion.ver", currentVer)
-		-- PROMPT LOGS
-	else
-		local text = readfile("FarlsXavier\\currentVersion.ver")
-
-		if text == currentVer then
-			warn(currentVer, "Matches skipping logs")
-		else
-			warn(currentVer, "Does not match: "..text)
-			-- PROMPT LOGS
+coroutine.wrap(function()
+	local currentVer = "1.4.0"
+	if isfolder("FarlsXavier") then
+		if not isfile("FarlsXavier\\currentVersion.ver") then
 			writefile("FarlsXavier\\currentVersion.ver", currentVer)
+			-- PROMPT LOGS
+		else
+			local text = readfile("FarlsXavier\\currentVersion.ver")
+
+			if text == currentVer then
+				warn(currentVer, "Matches skipping logs")
+			else
+				warn(currentVer, "Does not match: "..text)
+				-- PROMPT LOGS
+				writefile("FarlsXavier\\currentVersion.ver", currentVer)
+			end
 		end
+	else
+		makefolder("FarlsXavier")
+		-- PROMPT LOGS
+		writefile("FarlsXavier\\currentVersion.ver", currentVer)
 	end
-else
-	makefolder("FarlsXavier")
-	-- PROMPT LOGS
-	writefile("FarlsXavier\\currentVersion.ver", currentVer)
-end]]
+end)()
 
 return Library
