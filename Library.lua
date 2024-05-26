@@ -94,7 +94,8 @@ end
 function Library:Window(args)
 	-- Check if args are correct
 	args = Library:Validate({
-		Title = "Title"
+		Title = "Title",
+		OnClose = function() end
 	}, args or {})
 
 	-- Vars 
@@ -709,6 +710,7 @@ function Library:Window(args)
 	end)
 
 	CloseButton.Activated:Connect(function()
+		args.OnClose()
 		_G.RanThisScript = false
 		for i,v in pairs(MainFrame:GetDescendants()) do
 			if v.Parent == Topbar then
@@ -1186,6 +1188,26 @@ function Library:Window(args)
 	return This
 end
 
-print("This is version 1.3.1")
+local currentVer = "1.4.0"
+if isfolder("FarlsXavier") then
+	if not isfile("FarlsXavier\\currentVersion.ver") then
+		writefile("FarlsXavier\\currentVersion.ver", currentVer)
+		-- PROMPT LOGS
+	else
+		local text = readfile("FarlsXavier\\currentVersion.ver")
+
+		if text == currentVer then
+			warn(currentVer, "Matches skipping logs")
+		else
+			warn(currentVer, "Does not match: "..text)
+			-- PROMPT LOGS
+			writefile("FarlsXavier\\currentVersion.ver", currentVer)
+		end
+	end
+else
+	makefolder("FarlsXavier")
+	-- PROMPT LOGS
+	writefile("FarlsXavier\\currentVersion.ver", currentVer)
+end
 
 return Library
