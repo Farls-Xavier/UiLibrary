@@ -91,6 +91,25 @@ function Library:Validate(defaults, args)
 	return args
 end
 
+function Library:FlushTable(table, args)
+	for i,v in pairs(table) do
+		if args then
+			if args.Disconnect == true and typeof(v) == "RBXScriptConnection" then
+				v:Disconnect()
+				-- So no error like multiple thingy things running
+				v = nil
+			end
+			if args.RemoveDrawings == true then
+				v:Remove()
+			end
+		end
+	end
+end
+
+function Library:destroy()
+	ScreenGui:Destroy()
+end
+
 function Library:tween(object, goal, callback)
 	local tween = TweenService:Create(object, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), goal)
 	tween.Completed:Connect(callback or function() end)
@@ -715,7 +734,7 @@ function Library:Window(args)
 		end
 	end)
 
-	CloseButton.Activated:Connect(function()
+	function This:Close()
 		args.OnClose()
 		_G.RanThisScript = false
 		for i,v in pairs(MainFrame:GetDescendants()) do
@@ -743,6 +762,10 @@ function Library:Window(args)
 				ScreenGui:Destroy()
 			end)
 		end)
+	end
+
+	CloseButton.Activated:Connect(function()
+		This:Close()
 	end)
 
 	MakeDraggable(Topbar, MainFrame)
