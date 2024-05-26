@@ -1188,7 +1188,7 @@ function Library:Window(args)
 	return This
 end
 
-coroutine.wrap(function()
+--[[coroutine.wrap(function()
 	local currentVer = "1.4.0"
 	if isfolder("FarlsXavier") then
 		if not isfile("FarlsXavier\\currentVersion.ver") then
@@ -1211,5 +1211,5 @@ coroutine.wrap(function()
 		writefile("FarlsXavier\\currentVersion.ver", currentVer)
 	end
 end)()
-
+]]
 return Library
