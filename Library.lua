@@ -1,5 +1,11 @@
 local Library = {} -- Temporary name
 
+--[[if isfolder("@FarlsXavier") then
+	warn("Folder Made")
+else
+	makefolder("@FarlsXavier")
+end]]
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
