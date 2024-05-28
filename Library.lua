@@ -1,3 +1,5 @@
+--UGHHH MY CODE IS A MESS
+
 local Library = {} -- Temporary name(I say temporary like ill ever change it :sob:)
 
 if isfolder("@FarlsXavier") then
@@ -41,7 +43,7 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local function MakeDraggable(topbarobject, object) --Skidded from the discord UI.. -10 aura 
+local function MakeDraggable(topbarobject, object) --Skidded from the discord UI.. -1000 aura 
 	local Dragging = nil
 	local DragInput = nil
 	local DragStart = nil
@@ -1252,7 +1254,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.3"
+local currentVer = "1.4.0"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
