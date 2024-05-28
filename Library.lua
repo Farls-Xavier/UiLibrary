@@ -18,6 +18,7 @@ local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
+print(readfile("@FarlsXavier\\UiConfiguration.ini"))
 local ConfigDecode = game:GetService("HttpService"):JSONDecode(readfile("@FarlsXavier\\UiConfiguration.ini"))
 
 local Player = game:GetService("Players").LocalPlayer
