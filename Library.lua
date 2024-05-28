@@ -13,7 +13,9 @@ if isfile("@FarlsXavier\\UiConfiguration.ini") then
 	warn("Good boy... dont delete it... LEAVE IT")
 else
 	writefile("@FarlsXavier\\UiConfiguration.ini", [[
-		{"Topbar_Color": "22, 17, 27"}
+		{"Topbar_Color_R": "22"},
+		{"Topbar_Color_G": "17"},
+		{"Topbar_Color_B": "27"},
 	]])
 end
 
@@ -204,7 +206,8 @@ function Library:Window(args)
 
 	Topbar.Name = "Topbar"
 	Topbar.Parent = MainFrame
-	Topbar.BackgroundColor3 = Color3.fromRGB(tonumber(ConfigDecode.Topbar_Color)) or Color3.fromRGB(22, 17, 27)
+	
+	Topbar.BackgroundColor3 = Color3.fromRGB(ConfigDecode.Topbar_Color_R, ConfigDecode.Topbar_Color_G, ConfigDecode.Topbar_Color_B) or Color3.fromRGB(22, 17, 27)
 	Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Topbar.BorderSizePixel = 0
 	Topbar.Position = UDim2.new(-8.96257788e-08, 0, 0, 0)
@@ -581,7 +584,7 @@ function Library:Window(args)
 
 	NotiTopBar.Name = "NotiTopBar"
 	NotiTopBar.Parent = Notification
-	NotiTopBar.BackgroundColor3 = Color3.fromRGB(tonumber(ConfigDecode.Topbar_Color)) or Color3.fromRGB(22, 17, 27)
+	NotiTopBar.BackgroundColor3 = Color3.fromRGB(ConfigDecode.Topbar_Color_R, ConfigDecode.Topbar_Color_G, ConfigDecode.Topbar_Color_B) or Color3.fromRGB(22, 17, 27)
 	NotiTopBar.BackgroundTransparency = 1.000
 	NotiTopBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	NotiTopBar.BorderSizePixel = 0
