@@ -2,27 +2,28 @@ local Library = {} -- Temporary name(I say temporary like ill ever change it :so
 
 if isfolder("@FarlsXavier") then
 	warn("Root folder exist!!!!!!!! it really does!!!") -- why the fuck did I do this??? ill leave it
-	if isfile("@FarlsXavier\\UiConfiguration.ini") then
-		warn("Good boy... dont delete it")
-	else
-		writefile("@FarlsXavier\\UiConfiguration.ini", [[
-			{"Topbar_Color": "22, 17, 27"}
-		]])
-	end
 else
 	warn("making root folder...(Dont delete it you cuckold)") -- idk why I use the word cuck so much I could change it to faggot but oh well!
 	makefolder("@FarlsXavier")
+end
+
+-- SEGREGATION CASUE ROBLOX SUCKS
+
+if isfile("@FarlsXavier\\UiConfiguration.ini") then
+	warn("Good boy... dont delete it... LEAVE IT")
+else
+	writefile("@FarlsXavier\\UiConfiguration.ini", [[
+		{"Topbar_Color": "22, 17, 27"}
+	]])
 end
 
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
-print(readfile("@FarlsXavier\\UiConfiguration.ini"))
 local ConfigDecode = game:GetService("HttpService"):JSONDecode(readfile("@FarlsXavier\\UiConfiguration.ini"))
 
 local Player = game:GetService("Players").LocalPlayer
-local Camera = workspace.CurrentCamera
 local Mouse = Player:GetMouse()
 
 --Detect Existing instance(This only took 10 minutes)
