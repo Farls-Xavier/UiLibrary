@@ -13,9 +13,11 @@ if isfile("@FarlsXavier\\UiConfiguration.ini") then
 	warn("Good boy... dont delete it... LEAVE IT")
 else
 	writefile("@FarlsXavier\\UiConfiguration.ini", [[
-		{"Topbar_Color_R": "22"},
-		{"Topbar_Color_G": "17"},
-		{"Topbar_Color_B": "27"},
+		{
+			"Topbar_Color_R": "22",
+			"Topbar_Color_G": "17",
+			"Topbar_Color_B": "27"
+		}
 	]])
 end
 
@@ -1250,7 +1252,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.0"
+local currentVer = "1.4.3"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
