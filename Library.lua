@@ -104,6 +104,7 @@ end
 
 function Library:destroy()
 	ScreenGui:Destroy()
+	Library = nil
 end
 
 function Library:tween(object, goal, callback)
@@ -203,7 +204,7 @@ function Library:Window(args)
 
 	Topbar.Name = "Topbar"
 	Topbar.Parent = MainFrame
-	Topbar.BackgroundColor3 = Color3.fromRGB(ConfigDecode.Topbar_Color) or Color3.fromRGB(22, 17, 27)
+	Topbar.BackgroundColor3 = Color3.fromRGB(tonumber(ConfigDecode.Topbar_Color)) or Color3.fromRGB(22, 17, 27)
 	Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Topbar.BorderSizePixel = 0
 	Topbar.Position = UDim2.new(-8.96257788e-08, 0, 0, 0)
@@ -580,7 +581,7 @@ function Library:Window(args)
 
 	NotiTopBar.Name = "NotiTopBar"
 	NotiTopBar.Parent = Notification
-	NotiTopBar.BackgroundColor3 = Color3.fromRGB(ConfigDecode.Topbar_Color) or Color3.fromRGB(22, 17, 27)
+	NotiTopBar.BackgroundColor3 = Color3.fromRGB(tonumber(ConfigDecode.Topbar_Color)) or Color3.fromRGB(22, 17, 27)
 	NotiTopBar.BackgroundTransparency = 1.000
 	NotiTopBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	NotiTopBar.BorderSizePixel = 0
