@@ -1,10 +1,10 @@
 local Library = {} -- Temporary name
 
---[[if isfolder("@FarlsXavier") then
+if isfolder("@FarlsXavier") then
 	warn("Folder Made")
 else
 	makefolder("@FarlsXavier")
-end]]
+end
 
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -89,21 +89,6 @@ function Library:Validate(defaults, args)
 		end
 	end     
 	return args
-end
-
-function Library:FlushTable(table, args)
-	for i,v in pairs(table) do
-		if args then
-			if args.Disconnect == true and typeof(v) == "RBXScriptConnection" then
-				v:Disconnect()
-				-- So no error like multiple thingy things running
-				v = nil
-			end
-			if args.RemoveDrawings == true then
-				v:Remove()
-			end
-		end
-	end
 end
 
 function Library:destroy()
@@ -1211,34 +1196,66 @@ function Library:Window(args)
 			return Label
 		end
 
+		function Tab:Dropdown(args)
+			args = Library:Validate({
+				Text = "  Dropdown",
+				Callback = function(v) end,
+				Items = {}
+			}, args or {})
+
+			local Dropdown = {
+				Items = {
+					["id"] = {
+						{},
+						"value"
+					}
+				}
+			}
+
+			local RenderedDropdown
+			local RenderedTemplate
+
+			function Dropdown:Add(id, value)
+				
+			end
+
+			function Dropdown:Remove()
+				
+			end
+
+			function Dropdown:Clear()
+				
+			end
+
+			return Dropdown
+		end
+
 		return Tab
 	end
 
 	return This
 end
 
---[[coroutine.wrap(function()
-	local currentVer = "1.4.0"
-	if isfolder("FarlsXavier") then
-		if not isfile("FarlsXavier\\currentVersion.ver") then
-			writefile("FarlsXavier\\currentVersion.ver", currentVer)
+local currentVer = "1.4.0"
+	if isfolder("@FarlsXavier") then
+		if not isfile("@FarlsXavier\\currentVersion.ver") then
+			writefile("@FarlsXavier\\currentVersion.ver", currentVer)
 			-- PROMPT LOGS
 		else
-			local text = readfile("FarlsXavier\\currentVersion.ver")
+			local text = readfile("@FarlsXavier\\currentVersion.ver")
 
 			if text == currentVer then
 				warn(currentVer, "Matches skipping logs")
 			else
 				warn(currentVer, "Does not match: "..text)
 				-- PROMPT LOGS
-				writefile("FarlsXavier\\currentVersion.ver", currentVer)
+				writefile("@FarlsXavier\\currentVersion.ver", currentVer)
 			end
 		end
 	else
-		makefolder("FarlsXavier")
+		makefolder("@FarlsXavier")
 		-- PROMPT LOGS
-		writefile("FarlsXavier\\currentVersion.ver", currentVer)
+		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
 	end
-end)()
-]]
+
 return Library
