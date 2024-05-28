@@ -1,8 +1,16 @@
-local Library = {} -- Temporary name
+local Library = {} -- Temporary name(I say temporary like ill ever change it :sob:)
 
 if isfolder("@FarlsXavier") then
-	warn("Folder Made")
+	warn("Root folder exist!!!!!!!! it really does!!!") -- why the fuck did I do this??? ill leave it
+	if isfile("@FarlsXavier\\UiConfiguration.ini") then
+		warn("Good boy... dont delete it")
+	else
+		writefile("@FarlsXavier\\UiConfiguration.ini", [[
+			{"Topbar_Color": "22, 17, 27"}
+		]])
+	end
 else
+	warn("making root folder...(Dont delete it you cuckold)") -- idk why I use the word cuck so much I could change it to faggot but oh well!
 	makefolder("@FarlsXavier")
 end
 
@@ -10,12 +18,13 @@ local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
+local ConfigDecode = game:GetService("HttpService"):JSONDecode(readfile("@FarlsXavier\\UiConfiguration.ini"))
 
 local Player = game:GetService("Players").LocalPlayer
 local Camera = workspace.CurrentCamera
 local Mouse = Player:GetMouse()
 
---Detect Existing instance
+--Detect Existing instance(This only took 10 minutes)
 if _G.RanThisScript then
 	return
 end
@@ -26,7 +35,7 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local function MakeDraggable(topbarobject, object)
+local function MakeDraggable(topbarobject, object) --Skidded from the discord UI.. -10 aura 
 	local Dragging = nil
 	local DragInput = nil
 	local DragStart = nil
@@ -177,7 +186,6 @@ function Library:Window(args)
 	local DropShadow_2 = Instance.new("ImageLabel")
 	local MSG = Instance.new("TextLabel")
 
-
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = ScreenGui
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -193,7 +201,7 @@ function Library:Window(args)
 
 	Topbar.Name = "Topbar"
 	Topbar.Parent = MainFrame
-	Topbar.BackgroundColor3 = Color3.fromRGB(22, 17, 27)
+	Topbar.BackgroundColor3 = Color3.fromRGB(ConfigDecode.Topbar_Color) or Color3.fromRGB(22, 17, 27)
 	Topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Topbar.BorderSizePixel = 0
 	Topbar.Position = UDim2.new(-8.96257788e-08, 0, 0, 0)
@@ -570,7 +578,7 @@ function Library:Window(args)
 
 	NotiTopBar.Name = "NotiTopBar"
 	NotiTopBar.Parent = Notification
-	NotiTopBar.BackgroundColor3 = Color3.fromRGB(34, 27, 42)
+	NotiTopBar.BackgroundColor3 = Color3.fromRGB(ConfigDecode.Topbar_Color) or Color3.fromRGB(22, 17, 27)
 	NotiTopBar.BackgroundTransparency = 1.000
 	NotiTopBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	NotiTopBar.BorderSizePixel = 0
@@ -1237,25 +1245,22 @@ function Library:Window(args)
 end
 
 local currentVer = "1.4.0"
-	if isfolder("@FarlsXavier") then
-		if not isfile("@FarlsXavier\\currentVersion.ver") then
-			writefile("@FarlsXavier\\currentVersion.ver", currentVer)
-			-- PROMPT LOGS
-		else
-			local text = readfile("@FarlsXavier\\currentVersion.ver")
-
-			if text == currentVer then
-				warn(currentVer, "Matches skipping logs")
-			else
-				warn(currentVer, "Does not match: "..text)
-				-- PROMPT LOGS
-				writefile("@FarlsXavier\\currentVersion.ver", currentVer)
-			end
-		end
-	else
-		makefolder("@FarlsXavier")
-		-- PROMPT LOGS
+if isfolder("@FarlsXavier") then
+	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
+	else
+		local text = readfile("@FarlsXavier\\currentVersion.ver")
+		if text == currentVer then
+			warn(currentVer, "Matches skipping logs")
+		else
+			warn(currentVer, "Does not match: "..text)
+			writefile("@FarlsXavier\\currentVersion.ver", currentVer)
+		end
 	end
+else
+	makefolder("@FarlsXavier")
+	writefile("@FarlsXavier\\currentVersion.ver", currentVer)
+	warn("OH MY FUCKING GOD THERE NO FOLDER STOP DELETING IT YOU CUCK!!! ILL CREATE IS CAUSE IM GOOD BUT STOP IT FOR FUCKS SAKE!!! NEXT TIME ITS YOUR VIRGINITY!!!") -- ONMCE AGAIN WHY DIDNT I USE FAGGOT INSTEAD OF CUCK
+end
 
 return Library
