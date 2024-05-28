@@ -32,12 +32,6 @@ local ConfigDecode = game:GetService("HttpService"):JSONDecode(readfile("@FarlsX
 local Player = game:GetService("Players").LocalPlayer
 local Mouse = Player:GetMouse()
 
---Detect Existing instance(This only took 10 minutes)
-if _G.RanThisScript then
-	return
-end
-_G.RanThisScript = true
-
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
