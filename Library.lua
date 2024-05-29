@@ -1248,7 +1248,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.0"
+local currentVer = "1.4.2"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
