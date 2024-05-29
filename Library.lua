@@ -222,7 +222,7 @@ function Library:Window(args)
 	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Title.BorderSizePixel = 0
 	Title.Position = UDim2.new(0.00870001968, 0, 0, 0)
-	Title.Size = UDim2.new(0.179689214, 0, 1, 0)
+	Title.Size = UDim2.new(0.72, 0, 1, 0)
 	Title.Font = Enum.Font.Gotham
 	Title.Text = args.Title
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -1257,8 +1257,12 @@ if isfolder("@FarlsXavier") then
 		if text == currentVer then
 			warn(currentVer, "Matches skipping logs")
 		else
-			warn(currentVer, "Does not match: "..text)
+			warn(currentVer, "Does not match: "..text, "Updating...")
 			writefile("@FarlsXavier\\currentVersion.ver", currentVer)
+			wait(.1)
+			if readfile("@FarlsXavier\\currentVersion.ver") == currentVer then
+				warn("Updated.")
+			end
 		end
 	end
 else
