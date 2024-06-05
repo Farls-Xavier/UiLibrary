@@ -27,7 +27,8 @@ local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
-local ConfigDecode = game:GetService("HttpService"):JSONDecode(readfile("@FarlsXavier\\UiConfiguration.ini"))
+local HttpService = game:GetService("HttpService")
+local ConfigDecode = HttpService:JSONDecode(readfile("@FarlsXavier\\UiConfiguration.ini"))
 
 local Player = game:GetService("Players").LocalPlayer
 local Mouse = Player:GetMouse()
@@ -113,6 +114,8 @@ function Library:tween(object, goal, callback)
 	tween:Play()
 end
 
+Library.WindoHHHH = nil -- I know how to spell I thought it was funny... Im not funny
+
 function Library:Window(args)
 	-- Check if args are correct
 	args = Library:Validate({
@@ -126,6 +129,7 @@ function Library:Window(args)
 		CurrentTabName = nil,
 		SelectedTarget = nil
 	}
+	Library.Window = This
 	local Minimized = false
 
 	-- Instancing
@@ -188,6 +192,17 @@ function Library:Window(args)
 	local DropShadowHolder_2 = Instance.new("Frame")
 	local DropShadow_2 = Instance.new("ImageLabel")
 	local MSG = Instance.new("TextLabel")
+	local TemplateDropdown = Instance.new("Frame")
+	local DropdownUICorner = Instance.new("UICorner")
+	local DropDownVisuals = Instance.new("TextButton")
+	local DropDownVisualsUICorner = Instance.new("UICorner")
+	local DropdownArrow = Instance.new("ImageLabel")
+	local DropdownimageUICorner = Instance.new("UICorner")
+	local Dropdownlist = Instance.new("Frame")
+	local DropdownListLayout = Instance.new("UIListLayout")
+	local TemplateDropdownBTN = Instance.new("TextButton")
+	local DropdownBtnUICorner = Instance.new("UICorner")
+	local DropdownlistUICorner = Instance.new("UICorner")
 
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = ScreenGui
@@ -696,6 +711,83 @@ function Library:Window(args)
 	TogglerUICorner.CornerRadius = UDim.new(0, 2)
 	TogglerUICorner.Name = "TogglerUICorner"
 	TogglerUICorner.Parent = Toggler
+
+	TemplateDropdown.Name = "TemplateDropdown"
+	TemplateDropdown.Parent = Template
+	TemplateDropdown.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	TemplateDropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TemplateDropdown.BorderSizePixel = 0
+	TemplateDropdown.Size = UDim2.new(0, 195, 0, 30)
+	TemplateDropdown.Visible = false
+
+	DropdownUICorner.CornerRadius = UDim.new(0, 2)
+	DropdownUICorner.Name = "DropdownUICorner"
+	DropdownUICorner.Parent = TemplateDropdown
+
+	DropDownVisuals.Name = "DropDownVisuals"
+	DropDownVisuals.Parent = TemplateDropdown
+	DropDownVisuals.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	DropDownVisuals.BackgroundTransparency = 1.000
+	DropDownVisuals.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	DropDownVisuals.BorderSizePixel = 0
+	DropDownVisuals.Size = UDim2.new(1, 0, 1, 0)
+	DropDownVisuals.Font = Enum.Font.Gotham
+	DropDownVisuals.Text = "  Dropdown"
+	DropDownVisuals.TextColor3 = Color3.fromRGB(200, 200, 200)
+	DropDownVisuals.TextSize = 14.000
+	DropDownVisuals.TextXAlignment = Enum.TextXAlignment.Left
+
+	DropDownVisualsUICorner.CornerRadius = UDim.new(0, 2)
+	DropDownVisualsUICorner.Name = "DropDownVisualsUICorner"
+	DropDownVisualsUICorner.Parent = DropDownVisuals
+
+	DropdownArrow.Name = "DropdownArrow"
+	DropdownArrow.Parent = TemplateDropdown
+	DropdownArrow.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+	DropdownArrow.BackgroundTransparency = 1
+	DropdownArrow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	DropdownArrow.BorderSizePixel = 0
+	DropdownArrow.Position = UDim2.new(0.866666675, 0, 0.13333334, 0)
+	DropdownArrow.Size = UDim2.new(0, 24, 0, 22)
+	DropdownArrow.Image = "rbxassetid://13846885079"
+	DropdownArrow.ScaleType = Enum.ScaleType.Fit
+
+	DropdownimageUICorner.CornerRadius = UDim.new(0, 2)
+	DropdownimageUICorner.Name = "DropdownimageUICorner"
+	DropdownimageUICorner.Parent = DropdownArrow
+
+	Dropdownlist.Name = "Dropdownlist"
+	Dropdownlist.Visible = false
+	Dropdownlist.Parent = TemplateDropdown
+	Dropdownlist.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	Dropdownlist.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Dropdownlist.BorderSizePixel = 0
+	Dropdownlist.Position = UDim2.new(0, 0, 0.979999781, 0)
+	Dropdownlist.Size = UDim2.new(0, 195, 0, 0)
+
+	DropdownListLayout.Name = "DropdownListLayout"
+	DropdownListLayout.Parent = Dropdownlist
+	DropdownListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	DropdownListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+	TemplateDropdownBTN.Name = "TemplateDropdownBTN"
+	TemplateDropdownBTN.Parent = Dropdownlist
+	TemplateDropdownBTN.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+	TemplateDropdownBTN.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TemplateDropdownBTN.BorderSizePixel = 0
+	TemplateDropdownBTN.Size = UDim2.new(0, 185, 0, 25)
+	TemplateDropdownBTN.Visible = false
+	TemplateDropdownBTN.Font = Enum.Font.Gotham
+	TemplateDropdownBTN.TextColor3 = Color3.fromRGB(200, 200, 200)
+	TemplateDropdownBTN.TextSize = 14.000
+
+	DropdownBtnUICorner.CornerRadius = UDim.new(0, 2)
+	DropdownBtnUICorner.Name = "DropdownBtnUICorner"
+	DropdownBtnUICorner.Parent = TemplateDropdownBTN
+
+	DropdownlistUICorner.CornerRadius = UDim.new(0, 1)
+	DropdownlistUICorner.Name = "DropdownlistUICorner"
+	DropdownlistUICorner.Parent = Dropdownlist
 
 	MinimizeButton.Activated:Connect(function()
 		Minimized = not Minimized
@@ -1218,26 +1310,83 @@ function Library:Window(args)
 			local Dropdown = {
 				Items = {
 					["id"] = {
-						{},
 						"value"
 					}
-				}
+				},
+				Children = {},
+				Open = false,
+				MouseDown = false,
+				Hover = false
 			}
 
-			local RenderedDropdown
-			local RenderedTemplate
+			local RenderedDropdown = TemplateDropdown:Clone()
+			local List = RenderedDropdown.Dropdownlist
+			local RenderedTemplate = List.TemplateDropdownBTN
+
+			RenderedDropdown.Parent = TabFrame
+			RenderedDropdown.DropDownVisuals.Text = "  "..args.Text
+			RenderedDropdown.Visible = true
 
 			function Dropdown:Add(id, value)
+				local addedChild = RenderedTemplate:Clone()
+				addedChild.Parent = List
+
+				Dropdown.Items[id] = {
+					instance = {},	
+					value = value
+				}
+				Dropdown.Items[id].instance = addedChild
 				
+				Dropdown.Items[id].instance.Visible = true
+				Dropdown.Items[id].instance.BackgroundTransparency = 1
+				Dropdown.Items[id].instance.TextTransparency = 1
+		
+				Dropdown.Items[id].instance.Name = id
+				Dropdown.Items[id].instance.Text = id
+
+				table.insert(Dropdown.Children, addedChild)
 			end
 
-			function Dropdown:Remove()
-				
+			function Dropdown:Remove(id)
+				if Dropdown.Items[id] ~= nil then
+					for i,v in pairs(Dropdown.Items[id].instance) do
+						v:Destroy()
+					end
+					Dropdown.Items[id] = nil
+				end
 			end
 
 			function Dropdown:Clear()
-				
+				for i,v in pairs(Dropdown.Items) do
+					v:Remove(i)
+				end
 			end
+
+			function Dropdown:Toggle()
+				Dropdown.Open = not Dropdown.Open
+				if Dropdown.Open then			
+					Library:tween(List, {Size = UDim2.new(0, 195, 0, 0)}, function()
+						List.Visible = false
+					end)
+				else
+					local count = 0
+					for i, v in pairs(Dropdown.Items) do
+						if v ~= nil then
+							count = count + 1
+						end
+					end
+					List.Visible = true
+					Library:tween(List, {Size = UDim2.new(0, 195, 0, 25 + (count) * 25)})
+				end
+				for i, v in pairs(Dropdown.Children) do
+					Library:tween(v, {BackgroundTransparency = 0})
+					Library:tween(v, {TextTransparency = 0})
+				end
+			end
+
+			RenderedDropdown.DropDownVisuals.Activated:Connect(function()
+				Dropdown:Toggle()
+			end)
 
 			return Dropdown
 		end
@@ -1262,6 +1411,10 @@ if isfolder("@FarlsXavier") then
 			wait(.1)
 			if readfile("@FarlsXavier\\currentVersion.ver") == currentVer then
 				warn("Updated.")
+				coroutine.wrap(function()
+					repeat wait() until Library.WindoHHHH ~= nil
+					Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
+				end)()
 			end
 		end
 	end
