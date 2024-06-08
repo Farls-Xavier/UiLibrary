@@ -12,15 +12,15 @@ end
 -- SEGREGATION CASUE ROBLOX SUCKS
 
 if isfile("@FarlsXavier\\UiConfiguration.ini") then
-	if readfile("@FarlsXavier\\UiConfiguration.ini") ~= loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))() then
+	if readfile("@FarlsXavier\\UiConfiguration.ini") ~= game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json") then
 		warn("Config file doesnt match updating.")
-		writefile("@FarlsXavier\\UiConfiguration.ini", loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))())
+		writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
 	else
 		warn("Good boy... dont delete it... LEAVE IT")
 	end
 else
 	warn("Config file dont exist... Didnt I tell you not to delete it??? Now i will dox you if you keep doing this")
-	writefile("@FarlsXavier\\UiConfiguration.ini", loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))())
+	writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
 end
 
 local Players = game:GetService("Players")
@@ -1397,7 +1397,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.4"
+local currentVer = "1.4.5"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
