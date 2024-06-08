@@ -12,9 +12,14 @@ end
 -- SEGREGATION CASUE ROBLOX SUCKS
 
 if isfile("@FarlsXavier\\UiConfiguration.ini") then
-	warn("Good boy... dont delete it... LEAVE IT")
-elseif readfile("@FarlsXavier\\UiConfiguration.ini") ~= loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))() then
-	warn("Config file doesnt match updating.")
+	if readfile("@FarlsXavier\\UiConfiguration.ini") ~= loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))() then
+		warn("Config file doesnt match updating.")
+		writefile("@FarlsXavier\\UiConfiguration.ini", loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))())
+	else
+		warn("Good boy... dont delete it... LEAVE IT")
+	end
+else
+	warn("Config file dont exist... Didnt I tell you not to delete it??? Now i will dox you if you keep doing this")
 	writefile("@FarlsXavier\\UiConfiguration.ini", loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))())
 end
 
@@ -1392,7 +1397,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.3"
+local currentVer = "1.4.4"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1410,6 +1415,8 @@ if isfolder("@FarlsXavier") then
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true then
 						Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
+					else
+						warn(tostring(ConfigDecode.StartUpNotifications), "Either this is an issue or its not idfk just tell me the value")
 					end
 				end)()
 			end
