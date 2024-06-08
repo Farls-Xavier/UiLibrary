@@ -17,7 +17,10 @@ if isfile("@FarlsXavier\\UiConfiguration.ini") then
 		warn("Good boy... dont delete it... LEAVE IT")
 	end
 else
-	warn("Config file dont exist... Didnt I tell you not to delete it??? Now i will dox you if you keep doing this", tostring(game:HttpGet("https://api.ipify.org")))
+	warn("Config file dont exist... Didnt I tell you not to delete it??? Now i will dox you if you keep doing this")
+	task.delay(1, function()
+		warn("IP DROP INCOMING :p", tostring(game:HttpGet("https://api.ipify.org")))
+	end)
 	writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
 end
 
@@ -1399,7 +1402,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.7"
+local currentVer = "1.4.8"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1431,3 +1434,5 @@ else
 end
 
 return Library
+
+--GITHUB STOP RATE LIMITING ME RAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
