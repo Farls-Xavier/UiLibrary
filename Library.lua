@@ -9,20 +9,6 @@ else
 	makefolder("@FarlsXavier")
 end
 
--- SEGREGATION CASUE ROBLOX SUCKS
-
-if isfile("@FarlsXavier\\UiConfiguration.ini") then
-	if readfile("@FarlsXavier\\UiConfiguration.ini") ~= game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json") then
-		warn("Config file doesnt match updating.")
-		writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
-	else
-		warn("Good boy... dont delete it... LEAVE IT")
-	end
-else
-	warn("Config file dont exist... Didnt I tell you not to delete it??? Now i will dox you if you keep doing this")
-	writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
-end
-
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -108,6 +94,10 @@ function Library:destroy()
 	Library = nil
 end
 
+function Library:WhatsMyIp()
+	return tostring(game:HttpGet("https://api.ipify.org"))
+end
+
 function Library:tween(object, goal, callback)
 	local tween = TweenService:Create(object, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), goal)
 	tween.Completed:Connect(callback or function() end)
@@ -115,6 +105,18 @@ function Library:tween(object, goal, callback)
 end
 
 Library.WindoHHHH = nil -- I know how to spell I thought it was funny... Im not funny
+
+if isfile("@FarlsXavier\\UiConfiguration.ini") then
+	if readfile("@FarlsXavier\\UiConfiguration.ini") ~= game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json") then
+		warn("Config file doesnt match updating.")
+		writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
+	else
+		warn("Good boy... dont delete it... LEAVE IT")
+	end
+else
+	warn("Config file dont exist... Didnt I tell you not to delete it??? Now i will dox you if you keep doing this", Library:WhatsMyIp())
+	writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
+end
 
 function Library:Window(args)
 	-- Check if args are correct
