@@ -13,14 +13,9 @@ end
 
 if isfile("@FarlsXavier\\UiConfiguration.ini") then
 	warn("Good boy... dont delete it... LEAVE IT")
-else
-	writefile("@FarlsXavier\\UiConfiguration.ini", [[
-		{
-			"Topbar_Color_R": "22",
-			"Topbar_Color_G": "17",
-			"Topbar_Color_B": "27"
-		}
-	]])
+elseif readfile("@FarlsXavier\\UiConfiguration.ini") ~= loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))() then
+	warn("Config file doesnt match updating.")
+	writefile("@FarlsXavier\\UiConfiguration.ini", loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))())
 end
 
 local Players = game:GetService("Players")
@@ -1397,7 +1392,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.2"
+local currentVer = "1.4.3"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1413,7 +1408,9 @@ if isfolder("@FarlsXavier") then
 				warn("Updated.")
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
-					Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
+					if ConfigDecode.StartUpNotifications == true then
+						Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
+					end
 				end)()
 			end
 		end
