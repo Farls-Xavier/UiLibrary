@@ -1402,7 +1402,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.0"
+local currentVer = "1.5.1"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1416,12 +1416,15 @@ if isfolder("@FarlsXavier") then
 			wait(.1)
 			if readfile("@FarlsXavier\\currentVersion.ver") == currentVer then
 				warn("Updated.")
-				if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-					print(tostring(Library.WindoHHHH))
-					Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
-				else
-					warn(tostring(Library.WindoHHHH), "Either this is an issue or its not idfk just tell me the value")
-				end
+				coroutine.wrap(function()
+					repeat wait() until Library.WindoHHHH ~= nil
+					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
+						print(tostring(Library.WindoHHHH))
+						Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
+					else
+						warn(tostring(Library.WindoHHHH), "Either this is an issue or its not idfk just tell me the value")
+					end
+				end)()
 			end
 		end
 	end
