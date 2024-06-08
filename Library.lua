@@ -1402,7 +1402,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.8"
+local currentVer = "1.4.9"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1416,14 +1416,12 @@ if isfolder("@FarlsXavier") then
 			wait(.1)
 			if readfile("@FarlsXavier\\currentVersion.ver") == currentVer then
 				warn("Updated.")
-				coroutine.wrap(function()
-					repeat wait() until Library.WindoHHHH ~= nil
-					if ConfigDecode.StartUpNotifications == true then
-						Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
-					else
-						warn(tostring(ConfigDecode.StartUpNotifications), "Either this is an issue or its not idfk just tell me the value")
-					end
-				end)()
+				if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
+					print(tostring(Library.WindoHHHH))
+					Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
+				else
+					warn(tostring(Library.WindoHHHH), "Either this is an issue or its not idfk just tell me the value")
+				end
 			end
 		end
 	end
@@ -1434,5 +1432,3 @@ else
 end
 
 return Library
-
---GITHUB STOP RATE LIMITING ME RAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
