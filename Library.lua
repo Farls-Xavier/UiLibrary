@@ -9,6 +9,18 @@ else
 	makefolder("@FarlsXavier")
 end
 
+if isfile("@FarlsXavier\\UiConfiguration.ini") then
+	if readfile("@FarlsXavier\\UiConfiguration.ini") ~= game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json") then
+		warn("Config file doesnt match updating.")
+		writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
+	else
+		warn("Good boy... dont delete it... LEAVE IT")
+	end
+else
+	warn("Config file dont exist... Didnt I tell you not to delete it??? Now i will dox you if you keep doing this", Library:WhatsMyIp())
+	writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
+end
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -16,7 +28,7 @@ local RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
 local ConfigDecode = HttpService:JSONDecode(readfile("@FarlsXavier\\UiConfiguration.ini"))
 
-local Player = game:GetService("Players").LocalPlayer
+local Player = Players.LocalPlayer
 local Mouse = Player:GetMouse()
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -105,18 +117,6 @@ function Library:tween(object, goal, callback)
 end
 
 Library.WindoHHHH = nil -- I know how to spell I thought it was funny... Im not funny
-
-if isfile("@FarlsXavier\\UiConfiguration.ini") then
-	if readfile("@FarlsXavier\\UiConfiguration.ini") ~= game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json") then
-		warn("Config file doesnt match updating.")
-		writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
-	else
-		warn("Good boy... dont delete it... LEAVE IT")
-	end
-else
-	warn("Config file dont exist... Didnt I tell you not to delete it??? Now i will dox you if you keep doing this", Library:WhatsMyIp())
-	writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
-end
 
 function Library:Window(args)
 	-- Check if args are correct
@@ -1399,7 +1399,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.5"
+local currentVer = "1.4.6"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
