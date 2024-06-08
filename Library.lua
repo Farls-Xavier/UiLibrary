@@ -134,7 +134,7 @@ function Library:Window(args)
 		CurrentTabName = nil,
 		SelectedTarget = nil
 	}
-	Library.Window = This
+	Library.WindoHHHH = This
 	local Minimized = false
 
 	-- Instancing
@@ -1402,7 +1402,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.4.9"
+local currentVer = "1.5.0"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
