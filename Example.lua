@@ -55,14 +55,14 @@ local Tab2 = Window:Tab({Text = "Tab 2", Icon = "rbxassetid//IDNUMBERHERE"})
 
 --Tab:Deactivate() 0 Arguments Don't use this
 
---Tab:Button() 2 Arguments This will make a button in your Tab you called this function on
+--Tab:Button() 2 Arguments This will make a button in your Tab you called the function on
 --[[ Button args
 Text:String
 Callback:Function
 ]]--
 
 Tab:Button({
-   Text = "Click me!"
+   Text = "Click me!",
    Callback = function()
        print("Pressed")
    end
@@ -71,3 +71,22 @@ Tab:Button({
 --[[ BUTTON FUNCTIONS ]]--
 --Button:SetText() 1 Argument Sets the buttons text to the argument of the function
 --Button:SetCallback() 1 Argument Replaces the callback with the argument of the function
+
+--Tab:Toggle() 2 arguments this will make a toggle button in your tab you called the function on
+--[[ Toggle args
+Text:String
+Callback:Function
+]]--
+
+Tab:Toggle({
+   Text = "Toggle Me!",
+   Callback = function(v)
+   if v == true then
+	print("true!!")
+   else
+        print("false!!")
+   end
+})
+
+--[[ TOGGLE FUNCTIONS ]]--
+--Toggle:Toggle() -- Dont use this
