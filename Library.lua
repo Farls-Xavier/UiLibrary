@@ -1344,41 +1344,6 @@ function Library:Window(args)
 				args.Callback = func
 			end
 
-			function Dropdown:Add(id, value)
-				if Dropdown.Items[id] ~= nil then
-					return
-				end
-				local addedChild = RenderedTemplate:Clone()
-				addedChild.Parent = List
-
-				Dropdown.Items[id] = {
-					instance = {},	
-					value = value
-				}
-				Dropdown.Items[id].instance = addedChild
-				
-				Dropdown.Items[id].instance.Visible = true
-				Dropdown.Items[id].instance.BackgroundTransparency = 1
-				Dropdown.Items[id].instance.TextTransparency = 1
-		
-				Dropdown.Items[id].instance.Name = id
-				Dropdown.Items[id].instance.Text = id
-
-				addedChild.MouseEnter:Connect(function()
-					Dropdown.HoveringItem = true
-				end)
-
-				addedChild.MouseLeave:Connect(function()
-					Dropdown.HoveringItem = false
-				end)
-
-				addedChild.Activated:Connect(function()
-					args.Callback(value)
-				end)
-
-				table.insert(Dropdown.Children, addedChild)
-			end
-
 			function Dropdown:Remove(id)
 				if Dropdown.Items[id] ~= nil then
 					for i,v in pairs(Dropdown.Items[id].instance) do
@@ -1429,6 +1394,42 @@ function Library:Window(args)
 				Dropdown.Open = not Dropdown.Open
 			end
 
+			function Dropdown:Add(id, value)
+				if Dropdown.Items[id] ~= nil then
+					return
+				end
+				local addedChild = RenderedTemplate:Clone()
+				addedChild.Parent = List
+
+				Dropdown.Items[id] = {
+					instance = {},	
+					value = value
+				}
+				Dropdown.Items[id].instance = addedChild
+				
+				Dropdown.Items[id].instance.Visible = true
+				Dropdown.Items[id].instance.BackgroundTransparency = 1
+				Dropdown.Items[id].instance.TextTransparency = 1
+		
+				Dropdown.Items[id].instance.Name = id
+				Dropdown.Items[id].instance.Text = id
+
+				addedChild.MouseEnter:Connect(function()
+					Dropdown.HoveringItem = true
+				end)
+
+				addedChild.MouseLeave:Connect(function()
+					Dropdown.HoveringItem = false
+				end)
+
+				addedChild.Activated:Connect(function()
+					args.Callback(value)
+					Dropdown:Toggle()
+				end)
+
+				table.insert(Dropdown.Children, addedChild)
+			end
+
 			RenderedDropdown.DropDownVisuals.Activated:Connect(function()
 				Dropdown:Toggle()
 			end)
@@ -1437,10 +1438,6 @@ function Library:Window(args)
 				if input.UserInputType == Enum.UserInputType.MouseButton1 then
 					if Dropdown.Hover then
 						Dropdown.MouseDown = true
-					else
-						if Dropdown.HoveringItem then
-							Dropdown:Toggle()
-						end
 					end
 				end
 			end)
@@ -1478,7 +1475,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.6"
+local currentVer = "1.5.7"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
