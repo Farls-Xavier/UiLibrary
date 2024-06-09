@@ -1396,6 +1396,7 @@ function Library:Window(args)
 
 			function Dropdown:Toggle()
 				if Dropdown.Open then
+					Library:tween(RenderedDropdown.DropdownArrow, {Rotation = 0})
 					for _, v in pairs(Dropdown.Children) do
 						Library:tween(v, {BackgroundTransparency = 1})
 						Library:tween(v, {TextTransparency = 1})
@@ -1409,6 +1410,7 @@ function Library:Window(args)
 						Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(70, 70, 70)})
 					end
 				else
+					Library:tween(RenderedDropdown.DropdownArrow, {Rotation = -180})
 					local count = 0
 					for i, v in pairs(Dropdown.Items) do
 						if v ~= nil then
@@ -1417,7 +1419,7 @@ function Library:Window(args)
 					end
 					List.Visible = true
 					Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(50, 50, 50)})
-					Library:tween(List, {Size = UDim2.new(0, 195, 0, 20 + (count) * 19)}, function()
+					Library:tween(List, {Size = UDim2.new(0, 195, 0, 25 + (count) * 20)}, function()
 						for _, v in pairs(Dropdown.Children) do
 							Library:tween(v, {BackgroundTransparency = 0})
 							Library:tween(v, {TextTransparency = 0})
@@ -1476,7 +1478,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.5"
+local currentVer = "1.5.6"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
