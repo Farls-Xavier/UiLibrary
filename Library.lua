@@ -1323,7 +1323,8 @@ function Library:Window(args)
 				Children = {},
 				Open = false,
 				MouseDown = false,
-				Hover = false
+				Hover = false,
+				HoveringItem = false
 			}
 
 			local RenderedDropdown = TemplateDropdown:Clone()
@@ -1355,6 +1356,14 @@ function Library:Window(args)
 				Dropdown.Items[id].instance.Name = id
 				Dropdown.Items[id].instance.Text = id
 
+				addedChild.MouseEnter:Connect(function()
+					Dropdown.HoveringItem = true
+				end)
+
+				addedChild.MouseLeave:Connect(function()
+					Dropdown.HoveringItem = false
+				end)
+
 				addedChild.Activated:Connect(function()
 					args.Callback(value)
 				end)
@@ -1375,6 +1384,10 @@ function Library:Window(args)
 				for i,v in pairs(Dropdown.Items) do
 					v:Remove(i)
 				end
+			end
+
+			function Dropdown:SetText(text)
+				RenderedDropdown.DropDownVisuals.Text = "  "..tostring(text)
 			end
 
 			function Dropdown:Toggle()
@@ -1413,8 +1426,14 @@ function Library:Window(args)
 			end)
 
 			UserInputService.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and Dropdown.Hover then
-					Dropdown.MouseDown = true
+				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if Dropdown.Hover then
+						Dropdown.MouseDown = true
+					else
+						if Dropdown.HoveringItem then
+							Dropdown:Toggle()
+						end
+					end
 				end
 			end)
 
@@ -1451,7 +1470,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.2"
+local currentVer = "1.5.3"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
