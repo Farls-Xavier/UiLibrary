@@ -9,10 +9,10 @@ else
 	makefolder("@FarlsXavier")
 end
 
-if isfile("@FarlsXavier\\UiConfiguration.ini") then
-	if readfile("@FarlsXavier\\UiConfiguration.ini") ~= game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json") then
+if isfile("@FarlsXavier\\UiConfig.json") then
+	if readfile("@FarlsXavier\\UiConfig.json") ~= game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json") then
 		warn("Config file doesnt match updating.")
-		writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
+		writefile("@FarlsXavier\\UiConfig.json", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
 	else
 		warn("Good boy... dont delete it... LEAVE IT")
 	end
@@ -21,7 +21,7 @@ else
 	task.delay(1, function()
 		warn("IP DROP INCOMING :p", tostring(game:HttpGet("https://api.ipify.org")))
 	end)
-	writefile("@FarlsXavier\\UiConfiguration.ini", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
+	writefile("@FarlsXavier\\UiConfig.json", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
 end
 
 local Players = game:GetService("Players")
@@ -29,7 +29,7 @@ local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
-local ConfigDecode = HttpService:JSONDecode(readfile("@FarlsXavier\\UiConfiguration.ini"))
+local ConfigDecode = HttpService:JSONDecode(readfile("@FarlsXavier\\UiConfig.json"))
 
 local Player = Players.LocalPlayer
 local Mouse = Player:GetMouse()
@@ -1384,7 +1384,7 @@ function Library:Window(args)
 					end
 					List.Visible = true
 					Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(50, 50, 50)})
-					Library:tween(List, {Size = UDim2.new(0, 195, 0, 25 + (count) * 20)}, function()
+					Library:tween(List, {Size = UDim2.new(0, 195, 0, 25 + (count * 20) + 10)}, function()
 						for _, v in pairs(Dropdown.Children) do
 							Library:tween(v, {BackgroundTransparency = 0})
 							Library:tween(v, {TextTransparency = 0})
@@ -1475,7 +1475,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.7"
+local currentVer = "1.5.8"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
