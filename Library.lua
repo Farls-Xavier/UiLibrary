@@ -1336,6 +1336,14 @@ function Library:Window(args)
 			RenderedDropdown.DropDownVisuals.Text = "  "..args.Text
 			RenderedDropdown.Visible = true
 
+			function Dropdown:SetText(text)
+				RenderedDropdown.DropDownVisuals.Text = "  "..tostring(text)
+			end
+
+			function Dropdown:SetCallback(func)
+				args.Callback = func
+			end
+
 			function Dropdown:Add(id, value)
 				if Dropdown.Items[id] ~= nil then
 					return
@@ -1384,10 +1392,6 @@ function Library:Window(args)
 				for i,v in pairs(Dropdown.Items) do
 					v:Remove(i)
 				end
-			end
-
-			function Dropdown:SetText(text)
-				RenderedDropdown.DropDownVisuals.Text = "  "..tostring(text)
 			end
 
 			function Dropdown:Toggle()
@@ -1470,7 +1474,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.3"
+local currentVer = "1.5.4"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
