@@ -749,6 +749,7 @@ function Library:Window(args)
 	DropdownArrow.Name = "DropdownArrow"
 	DropdownArrow.Parent = TemplateDropdown
 	DropdownArrow.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+	DropdownArrow.ImageColor3 = Color3.fromRGB(200, 200, 200)
 	DropdownArrow.BackgroundTransparency = 1
 	DropdownArrow.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	DropdownArrow.BorderSizePixel = 0
@@ -774,6 +775,7 @@ function Library:Window(args)
 	DropdownListLayout.Parent = Dropdownlist
 	DropdownListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	DropdownListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	DropdownListLayout.Padding = UDim.new(0, 1)
 
 	TemplateDropdownBTN.Name = "TemplateDropdownBTN"
 	TemplateDropdownBTN.Parent = Dropdownlist
@@ -798,14 +800,14 @@ function Library:Window(args)
 		Minimized = not Minimized
 		if Minimized then
 			for i,v in pairs(MainFrame:GetDescendants()) do
-				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("UIListLayout") and not v:IsA("Folder") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder then
+				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("UIListLayout") and not v:IsA("Folder") and v.Name ~= "TemplateDropdownBTN" and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder then
 					v.Visible = false
 				end
 			end
 			minimizeTween:Play()
 		else
 			for i,v in pairs(MainFrame:GetDescendants()) do
-				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("Folder") and not v:IsA("UIListLayout") and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder then
+				if v.Name ~= "Topbar" and not v:IsA("UICorner") and not v:IsA("Folder") and not v:IsA("UIListLayout") and v.Name ~= "TemplateDropdownBTN" and v.Parent ~= Topbar and v.Name ~= TemplateTabButton.Name and v.Parent.Parent ~= Tabholder then
 					task.delay(.2, function()
 						v.Visible = true
 					end)
@@ -1325,6 +1327,7 @@ function Library:Window(args)
 			}
 
 			local RenderedDropdown = TemplateDropdown:Clone()
+			RenderedDropdown.ZIndex = math.random(1, 99999)
 			local List = RenderedDropdown.Dropdownlist
 			local RenderedTemplate = List.TemplateDropdownBTN
 
@@ -1333,6 +1336,9 @@ function Library:Window(args)
 			RenderedDropdown.Visible = true
 
 			function Dropdown:Add(id, value)
+				if Dropdown.Items[id] ~= nil then
+					return
+				end
 				local addedChild = RenderedTemplate:Clone()
 				addedChild.Parent = List
 
@@ -1348,6 +1354,10 @@ function Library:Window(args)
 		
 				Dropdown.Items[id].instance.Name = id
 				Dropdown.Items[id].instance.Text = id
+
+				addedChild.Activated:Connect(function()
+					args.Callback(value)
+				end)
 
 				table.insert(Dropdown.Children, addedChild)
 			end
@@ -1368,11 +1378,17 @@ function Library:Window(args)
 			end
 
 			function Dropdown:Toggle()
-				Dropdown.Open = not Dropdown.Open
-				if Dropdown.Open then			
+				if Dropdown.Open then
+					for _, v in pairs(Dropdown.Children) do
+						Library:tween(v, {BackgroundTransparency = 1})
+						Library:tween(v, {TextTransparency = 1})
+					end
 					Library:tween(List, {Size = UDim2.new(0, 195, 0, 0)}, function()
 						List.Visible = false
 					end)
+					if Dropdown.Hover then
+						Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(70, 70, 70)})
+					end
 				else
 					local count = 0
 					for i, v in pairs(Dropdown.Items) do
@@ -1381,18 +1397,51 @@ function Library:Window(args)
 						end
 					end
 					List.Visible = true
-					Library:tween(List, {Size = UDim2.new(0, 195, 0, 25 + (count) * 25)})
+					Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(50, 50, 50)})
+					Library:tween(List, {Size = UDim2.new(0, 195, 0, 20 + (count) * 19)}, function()
+						for _, v in pairs(Dropdown.Children) do
+							Library:tween(v, {BackgroundTransparency = 0})
+							Library:tween(v, {TextTransparency = 0})
+						end
+					end)
 				end
-				for i, v in pairs(Dropdown.Children) do
-					Library:tween(v, {BackgroundTransparency = 0})
-					Library:tween(v, {TextTransparency = 0})
-				end
+				Dropdown.Open = not Dropdown.Open
 			end
 
 			RenderedDropdown.DropDownVisuals.Activated:Connect(function()
 				Dropdown:Toggle()
 			end)
 
+			UserInputService.InputBegan:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 and Dropdown.Hover then
+					Dropdown.MouseDown = true
+				end
+			end)
+
+			UserInputService.InputEnded:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					Dropdown.MouseDown = false
+				end
+			end)
+
+			RenderedDropdown.MouseEnter:Connect(function()
+				Dropdown.Hover = true
+
+				if not Dropdown.Open then
+					Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(70, 70, 70)})
+				end
+				Library:tween(RenderedDropdown.DropdownArrow, {ImageColor3 = Color3.fromRGB(255, 255, 255)})
+				Library:tween(RenderedDropdown.DropDownVisuals, {TextColor3 = Color3.fromRGB(255, 255, 255)})
+			end)
+
+			RenderedDropdown.MouseLeave:Connect(function()
+				Dropdown.Hover = false
+
+				Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(50, 50, 50)})
+				Library:tween(RenderedDropdown.DropdownArrow, {ImageColor3 = Color3.fromRGB(200, 200, 200)})
+				Library:tween(RenderedDropdown.DropDownVisuals, {TextColor3 = Color3.fromRGB(200, 200, 200)})
+			end)
+			
 			return Dropdown
 		end
 
@@ -1402,7 +1451,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.1"
+local currentVer = "1.5.2"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
