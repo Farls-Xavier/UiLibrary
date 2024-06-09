@@ -2,6 +2,10 @@
 
 local Library = {} -- Temporary name(I say temporary like ill ever change it :sob:)
 
+function Library:strip(str)
+	return str:match("^%s*(.-)%s*$")
+end
+
 if isfolder("@FarlsXavier") then
 	warn("Root folder exist!!!!!!!! it really does!!!") -- why the fuck did I do this??? ill leave it
 else
@@ -10,7 +14,7 @@ else
 end
 
 if isfile("@FarlsXavier\\UiConfig.json") then
-	if readfile("@FarlsXavier\\UiConfig.json") ~= game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json") then
+	if Library:strip(readfile("@FarlsXavier\\UiConfig.json")) ~= Library:strip(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json")) then
 		warn("Config file doesnt match updating.")
 		writefile("@FarlsXavier\\UiConfig.json", game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Config.json"))
 	else
