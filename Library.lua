@@ -1400,8 +1400,10 @@ function Library:Window(args)
 						Library:tween(v, {BackgroundTransparency = 1})
 						Library:tween(v, {TextTransparency = 1})
 					end
-					Library:tween(List, {Size = UDim2.new(0, 195, 0, 0)}, function()
-						List.Visible = false
+					task.delay(.075, function()
+						Library:tween(List, {Size = UDim2.new(0, 195, 0, 0)}, function()
+							List.Visible = false
+						end)
 					end)
 					if Dropdown.Hover then
 						Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(70, 70, 70)})
@@ -1474,16 +1476,16 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.4"
+local currentVer = "1.5.5"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
 	else
-		local text = readfile("@FarlsXavier\\currentVersion.ver")
-		if text == currentVer then
+		local oldVer = readfile("@FarlsXavier\\currentVersion.ver")
+		if oldVer == currentVer then
 			warn(currentVer, "Matches skipping logs")
 		else
-			warn(currentVer, "Does not match: "..text, "Updating...")
+			warn(currentVer, "Does not match: "..oldVer, "Updating...")
 			writefile("@FarlsXavier\\currentVersion.ver", currentVer)
 			wait(.1)
 			if readfile("@FarlsXavier\\currentVersion.ver") == currentVer then
@@ -1492,7 +1494,7 @@ if isfolder("@FarlsXavier") then
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
 						print(tostring(Library.WindoHHHH))
-						Library.WindoHHHH:Notification("Notification", "Updated from "..text.." to "..tostring(currentVer), 5)
+						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 					else
 						warn(tostring(Library.WindoHHHH), "Either this is an issue or its not idfk just tell me the value")
 					end
