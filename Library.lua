@@ -232,6 +232,9 @@ function Library:Window(args)
 	local UpdateLogFolder = Instance.new("Folder")
 	local UIListLayoutForUHHH = Instance.new("UIListLayout")
 	local MainLabel = Instance.new("TextLabel")
+	local IfSeenInDexYoureGay = Instance.new("Folder")
+	local NotificationList = Instance.new("Frame")
+	local NotiListLayout = Instance.new("UIListLayout")
 
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = ScreenGui
@@ -245,6 +248,25 @@ function Library:Window(args)
 	MainFrameUiCorner.CornerRadius = UDim.new(0, 2)
 	MainFrameUiCorner.Name = "MainFrameUiCorner"
 	MainFrameUiCorner.Parent = MainFrame
+
+	IfSeenInDexYoureGay.Name = "IfSeenInDexYoureGay"
+	IfSeenInDexYoureGay.Parent = ScreenGui
+
+	NotificationList.Name = "NotificationList"
+	NotificationList.Parent = IfSeenInDexYoureGay
+	NotificationList.AnchorPoint = Vector2.new(0, 0.5)
+	NotificationList.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	NotificationList.BackgroundTransparency = 1.000
+	NotificationList.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	NotificationList.BorderSizePixel = 0
+	NotificationList.Position = UDim2.new(0, 0, 0.5, 0)
+	NotificationList.Size = UDim2.new(0, 203, 0, 668)
+
+	NotiListLayout.Name = "NotiListLayout"
+	NotiListLayout.Parent = NotificationList
+	NotiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	NotiListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+	NotiListLayout.Padding = UDim.new(0, 1)
 
 	Topbar.Name = "Topbar"
 	Topbar.Parent = MainFrame
@@ -1069,7 +1091,7 @@ function Library:Window(args)
 		local NewNotification = Notification:Clone()
 		NewNotification.NotiTopBar.TextLabel.Text = title
 		NewNotification.MSG.Text = msg.."("..duration..")s"
-		NewNotification.Parent = ScreenGui
+		NewNotification.Parent = NotificationList
 		NewNotification.Visible = true
 
 		local val = duration
@@ -1118,7 +1140,7 @@ function Library:Window(args)
 			Library:tween(Frame1, {BackgroundTransparency = 0})
 		end
 
-		Frame1.LogTopbar.LogTitle.Text = title
+		Frame1.LogTopbar.LogTitle.Text = title or "Log"
 		Frame1.Holder.UpdateLogFolder.MainLabel.Text = tostring(text)
 
 		Frame1.LogTopbar.LogTopBarClose.Activated:Connect(function()
@@ -1352,7 +1374,6 @@ function Library:Window(args)
 				else
 					Library:tween(RenderedToggle.Toggler, {ImageTransparency = 1})
 				end
-
 				args.Callback(Toggle.State)
 			end
 
@@ -1701,7 +1722,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.6.0"
+local currentVer = "1.6.1"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
