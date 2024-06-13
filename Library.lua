@@ -230,7 +230,7 @@ function Library:Window(args)
 	local DropShadow = Instance.new("ImageLabel")
 	local Holder = Instance.new("Frame")
 	local UpdateLogFolder = Instance.new("Folder")
-	local UIListLayout = Instance.new("UIListLayout")
+	local UIListLayoutForUHHH = Instance.new("UIListLayout")
 	local MainLabel = Instance.new("TextLabel")
 
 	MainFrame.Name = "MainFrame"
@@ -967,8 +967,8 @@ function Library:Window(args)
 	UpdateLogFolder.Name = "UpdateLogFolder"
 	UpdateLogFolder.Parent = Holder
 
-	UIListLayout.Parent = UpdateLogFolder
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayoutForUHHH.Parent = UpdateLogFolder
+	UIListLayoutForUHHH.SortOrder = Enum.SortOrder.LayoutOrder
 
 	MainLabel.Name = "MainLabel"
 	MainLabel.Parent = UpdateLogFolder
@@ -1718,7 +1718,7 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- Dropdowns are now functional!!!\n-- Buttons got a new argument(NotiText)\n  -- When used it will show a notification of the values"
+						local UpdateLog = "-- Dropdowns are now functional!!!\n-- Buttons got a new argument(NotiText)\n  -- When used it will show a notification of the values\n-- Fixed tab buttons being stacked."
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
