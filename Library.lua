@@ -260,7 +260,7 @@ function Library:Window(args)
 	NotificationList.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	NotificationList.BorderSizePixel = 0
 	NotificationList.Position = UDim2.new(0, 0, 0.5, 0)
-	NotificationList.Size = UDim2.new(0, 203, 0, 668)
+	NotificationList.Size = UDim2.new(0.186, 0, 1, 0)
 
 	NotiListLayout.Name = "NotiListLayout"
 	NotiListLayout.Parent = NotificationList
