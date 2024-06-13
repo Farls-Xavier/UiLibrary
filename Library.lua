@@ -212,6 +212,13 @@ function Library:Window(args)
 	local TemplateDropdownBTN = Instance.new("TextButton")
 	local DropdownBtnUICorner = Instance.new("UICorner")
 	local DropdownlistUICorner = Instance.new("UICorner")
+	local TemplateKeybind = Instance.new("Frame")
+	local KeybindUICorner = Instance.new("UICorner")
+	local KeybindDetection = Instance.new("TextButton")
+	local KeybindDetectionUICorner = Instance.new("UICorner")
+	local Keybindchange = Instance.new("ImageButton")
+	local KeybindChnageUICorner = Instance.new("UICorner")
+	local KeyText = Instance.new("TextLabel")
 
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = ScreenGui
@@ -799,6 +806,67 @@ function Library:Window(args)
 	DropdownlistUICorner.CornerRadius = UDim.new(0, 1)
 	DropdownlistUICorner.Name = "DropdownlistUICorner"
 	DropdownlistUICorner.Parent = Dropdownlist
+
+	TemplateKeybind.Name = "TemplateKeybind"
+	TemplateKeybind.Visible = false
+	TemplateKeybind.Parent = Template
+	TemplateKeybind.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	TemplateKeybind.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TemplateKeybind.BorderSizePixel = 0
+	TemplateKeybind.Size = UDim2.new(0, 153, 0, 30)
+
+	KeybindUICorner.CornerRadius = UDim.new(0, 2)
+	KeybindUICorner.Name = "KeybindUICorner"
+	KeybindUICorner.Parent = TemplateKeybind
+
+	KeybindDetection.Name = "KeybindDetection"
+	KeybindDetection.Parent = TemplateKeybind
+	KeybindDetection.AnchorPoint = Vector2.new(0, 0.5)
+	KeybindDetection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	KeybindDetection.BackgroundTransparency = 1.000
+	KeybindDetection.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	KeybindDetection.BorderSizePixel = 0
+	KeybindDetection.Position = UDim2.new(0, 0, 0.5, 0)
+	KeybindDetection.Size = UDim2.new(1, 0, 1, 0)
+	KeybindDetection.ZIndex = 3
+	KeybindDetection.Font = Enum.Font.Gotham
+	KeybindDetection.Text = "  Keybind"
+	KeybindDetection.TextColor3 = Color3.fromRGB(200, 200, 200)
+	KeybindDetection.TextSize = 14.000
+	KeybindDetection.TextXAlignment = Enum.TextXAlignment.Left
+
+	KeybindDetectionUICorner.CornerRadius = UDim.new(0, 2)
+	KeybindDetectionUICorner.Name = "KeybindDetectionUICorner"
+	KeybindDetectionUICorner.Parent = KeybindDetection
+
+	Keybindchange.Name = "Keybindchange"
+	Keybindchange.Parent = TemplateKeybind
+	Keybindchange.AnchorPoint = Vector2.new(1, 0.5)
+	Keybindchange.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+	Keybindchange.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Keybindchange.BorderSizePixel = 0
+	Keybindchange.Position = UDim2.new(0.954248369, 0, 0.5, 0)
+	Keybindchange.Size = UDim2.new(0, 20, 0, 20)
+	Keybindchange.Image = "rbxassetid://13846852950"
+	Keybindchange.ImageTransparency = 1.000
+
+	KeybindChnageUICorner.CornerRadius = UDim.new(0, 2)
+	KeybindChnageUICorner.Name = "KeybindChnageUICorner"
+	KeybindChnageUICorner.Parent = Keybindchange
+
+	KeyText.Name = "KeyText"
+	KeyText.Parent = Keybindchange
+	KeyText.AnchorPoint = Vector2.new(0.5, 0.5)
+	KeyText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	KeyText.BackgroundTransparency = 1.000
+	KeyText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	KeyText.BorderSizePixel = 0
+	KeyText.Position = UDim2.new(0.5, 0, 0.5, 0)
+	KeyText.Size = UDim2.new(0, 20, 0, 20)
+	KeyText.Font = Enum.Font.Gotham
+	KeyText.Text = "F"
+	KeyText.TextColor3 = Color3.fromRGB(255, 255, 255)
+	KeyText.TextSize = 16.000
 
 	MinimizeButton.Activated:Connect(function()
 		Minimized = not Minimized
@@ -1428,6 +1496,7 @@ function Library:Window(args)
 
 				addedChild.Activated:Connect(function()
 					args.Callback(value)
+					RenderedDropdown.DropDownVisuals.Text = "  "..id
 					Dropdown:Toggle()
 				end)
 
