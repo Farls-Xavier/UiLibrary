@@ -882,13 +882,13 @@ function Library:Window(args)
 	KeyText.TextSize = 16.000
 
 	BLAHBLAH.Name = "BLAHBLAH"
-	BLAHBLAH.Visible = false
 	BLAHBLAH.Parent = ScreenGui
+	BLAHBLAH.Visible = false
 	BLAHBLAH.AnchorPoint = Vector2.new(0.5, 0.5)
 	BLAHBLAH.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 	BLAHBLAH.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	BLAHBLAH.BorderSizePixel = 0
-	BLAHBLAH.Position = UDim2.new(0.150832817, 0, 0.573665202, 0)
+	BLAHBLAH.Position = UDim2.new(0.5, 0, 0.5, 0)
 	BLAHBLAH.Size = UDim2.new(0, 415, 0, 251)
 
 	LogUiCorner.CornerRadius = UDim.new(0, 2)
@@ -973,6 +973,7 @@ function Library:Window(args)
 	MainLabel.Name = "MainLabel"
 	MainLabel.Parent = UpdateLogFolder
 	MainLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MainLabel.TextTransparency = 1
 	MainLabel.BackgroundTransparency = 1.000
 	MainLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	MainLabel.BorderSizePixel = 0
@@ -1102,8 +1103,20 @@ function Library:Window(args)
 
 	function This:PromptLog(title, text, duration)
 		local Frame1 = BLAHBLAH:Clone()
+		Frame1.Parent = ScreenGui
 		Frame1.Visible = true
 		Frame1.ZIndex = 10
+
+		MakeDraggable(Frame1.LogTopbar, Frame1)
+
+		for _,v in pairs(Frame1:GetDescendants()) do
+			if v:IsA("TextLabel") or v:IsA("TextButton") then
+				Library:tween(v, {TextTransparency = 0})
+			elseif v:IsA("Frame") and v.Name ~= "DropShgad" and v.Name ~= "Holder" then
+				Library:tween(v, {BackgroundTransparency = 0})
+			end
+			Library:tween(Frame1, {BackgroundTransparency = 0})
+		end
 
 		Frame1.LogTopbar.LogTitle.Text = title
 		Frame1.Holder.UpdateLogFolder.MainLabel.Text = tostring(text)
@@ -1688,7 +1701,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.9"
+local currentVer = "1.6.0"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1705,13 +1718,10 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						print(tostring(Library.WindoHHHH))
+						local UpdateLog = "-- Dropdowns are now functional!!!\n-- Buttons got a new argument(NotiText)\n  -- When used it will show a notification of the values"
+
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
-						Library.WindoHHHH:PromptLog("Update Log", [[
-							-- Dropdowns are now functional!!!
-							-- Buttons got a new argument(NotiText)
-							  -- When used it will show a notification of the value
-						]])
+						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
 					else
 						warn(tostring(Library.WindoHHHH), "Either this is an issue or its not idfk just tell me the value")
 					end
