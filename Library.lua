@@ -1102,6 +1102,7 @@ function Library:Window(args)
 
 	function This:PromptLog(title, text, duration)
 		local Frame1 = BLAHBLAH:Clone()
+		Frame1.Visible = true
 		Frame1.ZIndex = 10
 
 		Frame1.LogTopbar.LogTitle.Text = title
