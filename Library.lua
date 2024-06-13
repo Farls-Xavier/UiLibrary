@@ -123,6 +123,7 @@ function Library:tween(object, goal, callback)
 	tween:Play()
 end
 
+Library.TempTable = {}
 Library.WindoHHHH = nil -- I know how to spell I thought it was funny... Im not funny
 
 function Library:Window(args)
@@ -219,6 +220,18 @@ function Library:Window(args)
 	local Keybindchange = Instance.new("ImageButton")
 	local KeybindChnageUICorner = Instance.new("UICorner")
 	local KeyText = Instance.new("TextLabel")
+	local BLAHBLAH = Instance.new("Frame")
+	local LogUiCorner = Instance.new("UICorner")
+	local LogTopbar = Instance.new("Frame")
+	local LogTopbarUiCorner = Instance.new("UICorner")
+	local LogTitle = Instance.new("TextLabel")
+	local LogTopBarClose = Instance.new("ImageButton")
+	local DropShgad = Instance.new("Frame")
+	local DropShadow = Instance.new("ImageLabel")
+	local Holder = Instance.new("Frame")
+	local UpdateLogFolder = Instance.new("Folder")
+	local UIListLayout = Instance.new("UIListLayout")
+	local MainLabel = Instance.new("TextLabel")
 
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = ScreenGui
@@ -868,6 +881,109 @@ function Library:Window(args)
 	KeyText.TextColor3 = Color3.fromRGB(255, 255, 255)
 	KeyText.TextSize = 16.000
 
+	BLAHBLAH.Name = "BLAHBLAH"
+	BLAHBLAH.Visible = false
+	BLAHBLAH.Parent = ScreenGui
+	BLAHBLAH.AnchorPoint = Vector2.new(0.5, 0.5)
+	BLAHBLAH.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	BLAHBLAH.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	BLAHBLAH.BorderSizePixel = 0
+	BLAHBLAH.Position = UDim2.new(0.150832817, 0, 0.573665202, 0)
+	BLAHBLAH.Size = UDim2.new(0, 415, 0, 251)
+
+	LogUiCorner.CornerRadius = UDim.new(0, 2)
+	LogUiCorner.Name = "LogUiCorner"
+	LogUiCorner.Parent = BLAHBLAH
+
+	LogTopbar.Name = "LogTopbar"
+	LogTopbar.Parent = BLAHBLAH
+	LogTopbar.BackgroundColor3 = Color3.fromRGB(22, 17, 27)
+	LogTopbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	LogTopbar.BorderSizePixel = 0
+	LogTopbar.Position = UDim2.new(-7.35363344e-08, 0, 0, 0)
+	LogTopbar.Size = UDim2.new(0, 415, 0, 20)
+
+	LogTopbarUiCorner.CornerRadius = UDim.new(0, 1)
+	LogTopbarUiCorner.Name = "LogTopbarUiCorner"
+	LogTopbarUiCorner.Parent = LogTopbar
+
+	LogTitle.Name = "LogTitle"
+	LogTitle.Parent = LogTopbar
+	LogTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	LogTitle.BackgroundTransparency = 1.000
+	LogTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	LogTitle.BorderSizePixel = 0
+	LogTitle.Position = UDim2.new(0.00870001968, 0, 0, 0)
+	LogTitle.Size = UDim2.new(0.179689214, 0, 1, 0)
+	LogTitle.Font = Enum.Font.Gotham
+	LogTitle.Text = "Title"
+	LogTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+	LogTitle.TextSize = 13.000
+	LogTitle.TextWrapped = true
+	LogTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+	LogTopBarClose.Name = "LogTopBarClose"
+	LogTopBarClose.Parent = LogTopbar
+	LogTopBarClose.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	LogTopBarClose.BackgroundTransparency = 1.000
+	LogTopBarClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	LogTopBarClose.BorderSizePixel = 0
+	LogTopBarClose.Position = UDim2.new(0.951647043, 0, 0, 0)
+	LogTopBarClose.Size = UDim2.new(0, 20, 0, 20)
+	LogTopBarClose.Image = "rbxassetid://14914803223"
+	LogTopBarClose.ScaleType = Enum.ScaleType.Fit
+
+	DropShgad.Name = "DropShgad"
+	DropShgad.Parent = BLAHBLAH
+	DropShgad.BackgroundTransparency = 1.000
+	DropShgad.BorderSizePixel = 0
+	DropShgad.Size = UDim2.new(1, 0, 1, 0)
+	DropShgad.ZIndex = 0
+
+	DropShadow.Name = "DropShadow"
+	DropShadow.Parent = DropShgad
+	DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	DropShadow.BackgroundTransparency = 1.000
+	DropShadow.BorderSizePixel = 0
+	DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+	DropShadow.Size = UDim2.new(1, 47, 1, 47)
+	DropShadow.ZIndex = 0
+	DropShadow.Image = "rbxassetid://6015897843"
+	DropShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	DropShadow.ImageTransparency = 1.000
+	DropShadow.ScaleType = Enum.ScaleType.Slice
+	DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+
+	Holder.Name = "Holder"
+	Holder.Parent = BLAHBLAH
+	Holder.AnchorPoint = Vector2.new(0.5, 0.5)
+	Holder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Holder.BackgroundTransparency = 1.000
+	Holder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Holder.BorderSizePixel = 0
+	Holder.Position = UDim2.new(0.5, 0, 0.539840817, 0)
+	Holder.Size = UDim2.new(1, 0, 0.920318842, 0)
+
+	UpdateLogFolder.Name = "UpdateLogFolder"
+	UpdateLogFolder.Parent = Holder
+
+	UIListLayout.Parent = UpdateLogFolder
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+	MainLabel.Name = "MainLabel"
+	MainLabel.Parent = UpdateLogFolder
+	MainLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MainLabel.BackgroundTransparency = 1.000
+	MainLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	MainLabel.BorderSizePixel = 0
+	MainLabel.Size = UDim2.new(0, 415, 0, 230)
+	MainLabel.Font = Enum.Font.Gotham
+	MainLabel.Text = "-- Added: Button Notifications"
+	MainLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	MainLabel.TextSize = 14.000
+	MainLabel.TextXAlignment = Enum.TextXAlignment.Left
+	MainLabel.TextYAlignment = Enum.TextYAlignment.Top
+
 	MinimizeButton.Activated:Connect(function()
 		Minimized = not Minimized
 		if Minimized then
@@ -930,6 +1046,16 @@ function Library:Window(args)
 				ScreenGui:Destroy()
 			end)
 		end)
+
+		for _, v in pairs(Library.TempTable) do
+			if typeof(v) == "RBXScriptConnection" then
+                v:Disconnect()
+			else
+				pcall(function()
+					v:Disconnect()
+				end)
+			end
+		end
 	end
 
 	CloseButton.Activated:Connect(function()
@@ -972,6 +1098,18 @@ function Library:Window(args)
 				end
 			end
 		end))
+	end
+
+	function This:PromptLog(title, text, duration)
+		local Frame1 = BLAHBLAH:Clone()
+		Frame1.ZIndex = 10
+
+		Frame1.LogTopbar.LogTitle.Text = title
+		Frame1.Holder.UpdateLogFolder.MainLabel.Text = tostring(text)
+
+		Frame1.LogTopbar.LogTopBarClose.Activated:Connect(function()
+			Frame1:Destroy()
+		end)
 	end
 
 	function This:UpdatePlayerList()
@@ -1025,7 +1163,7 @@ function Library:Window(args)
 	function This:Tab(args)
 		args = Library:Validate({
 			Text = "Tab",
-			Icon = "rbxassetid://15166889857"
+			Icon = ""
 		}, args or {})
 
 		local Tab = {
@@ -1105,6 +1243,7 @@ function Library:Window(args)
 		function Tab:Button(args)
 			args = Library:Validate({
 				Text = "Button",
+				NotiText = nil,
 				Callback = function() end
 			}, args or {})
 
@@ -1152,6 +1291,10 @@ function Library:Window(args)
 					Library:tween(RenderedButton, {BackgroundColor3 = Color3.fromRGB(70, 70, 70)})
 
 					args.Callback()
+
+					if args.NotiText ~= nil then
+						This:Notification("Notification", tostring(args.NotiText), 3)
+					end
 				end
 			end)
 
@@ -1408,10 +1551,6 @@ function Library:Window(args)
 			RenderedDropdown.DropDownVisuals.Text = "  "..args.Text
 			RenderedDropdown.Visible = true
 
-			function Dropdown:SetText(text)
-				RenderedDropdown.DropDownVisuals.Text = "  "..tostring(text)
-			end
-
 			function Dropdown:SetCallback(func)
 				args.Callback = func
 			end
@@ -1548,7 +1687,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.5.8"
+local currentVer = "1.5.9"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1567,6 +1706,11 @@ if isfolder("@FarlsXavier") then
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
 						print(tostring(Library.WindoHHHH))
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
+						Library.WindoHHHH:PromptLog("Update Log", [[
+							-- Dropdowns are now functional!!!
+							-- Buttons got a new argument(NotiText)
+							  -- When used it will show a notification of the value
+						]])
 					else
 						warn(tostring(Library.WindoHHHH), "Either this is an issue or its not idfk just tell me the value")
 					end
