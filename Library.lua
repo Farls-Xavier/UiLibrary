@@ -1604,6 +1604,7 @@ function Library:Window(args)
 				for i,v in pairs(Dropdown.Items) do
 					v:Remove(i)
 				end
+				table.clear(Dropdown.Children)
 			end
 
 			function Dropdown:Toggle()
@@ -1724,7 +1725,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.6.3"
+local currentVer = "1.6.4"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1741,12 +1742,10 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- Added a ListLayout for notifications.\n-- Increased Size of dropdown list\n-- Dropdowns now have a variable 'Value' for getting selected value"
+						local UpdateLog = "-- Increased Size of dropdown list\n-- Dropdowns now have a variable 'Value' for getting selected value\n-- Fixed lag over time from dropdown table not clearing"
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
-					else
-						warn(tostring(Library.WindoHHHH), "Either this is an issue or its not idfk just tell me the value")
 					end
 				end)()
 			end
