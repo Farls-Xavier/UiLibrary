@@ -1574,7 +1574,8 @@ function Library:Window(args)
 				Open = false,
 				MouseDown = false,
 				Hover = false,
-				HoveringItem = false
+				HoveringItem = false,
+				Value = nil
 			}
 
 			local RenderedDropdown = TemplateDropdown:Clone()
@@ -1670,6 +1671,7 @@ function Library:Window(args)
 
 				addedChild.Activated:Connect(function()
 					args.Callback(value)
+					Dropdown.Value = value
 					RenderedDropdown.DropDownVisuals.Text = "  "..id
 					Dropdown:Toggle()
 				end)
@@ -1722,7 +1724,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.6.2"
+local currentVer = "1.6.3"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1739,7 +1741,7 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- Dropdowns are now functional!!!\n-- Buttons got a new argument(NotiText)\n--- When used it will show a notification of the values\n-- Fixed tab buttons being stacked.\n-- Added a ListLayout for notifications.\n-- Increased Size of dropdown list."
+						local UpdateLog = "-- Added a ListLayout for notifications.\n-- Increased Size of dropdown list\n-- Dropdowns now have a variable 'Value' for getting selected value"
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
