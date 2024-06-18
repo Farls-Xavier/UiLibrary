@@ -1630,7 +1630,7 @@ function Library:Window(args)
 					end
 					List.Visible = true
 					Library:tween(RenderedDropdown, {BackgroundColor3 = Color3.fromRGB(50, 50, 50)})
-					Library:tween(List, {Size = UDim2.new(0, 195, 0, 25 + (count * 25) + 10)}, function()
+					Library:tween(List, {Size = UDim2.new(0, 195, 0, 25 + (count * 25) + 5)}, function()
 						for _, v in pairs(Dropdown.Children) do
 							Library:tween(v, {BackgroundTransparency = 0})
 							Library:tween(v, {TextTransparency = 0})
@@ -1658,7 +1658,7 @@ function Library:Window(args)
 				Dropdown.Items[id].instance.TextTransparency = 1
 		
 				Dropdown.Items[id].instance.Name = id
-				Dropdown.Items[id].instance.Text = id
+				Dropdown.Items[id].instance.Text = value
 
 				addedChild.MouseEnter:Connect(function()
 					Dropdown.HoveringItem = true
@@ -1739,7 +1739,7 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- Dropdowns are now functional!!!\n-- Buttons got a new argument(NotiText)\n  -- When used it will show a notification of the values\n-- Fixed tab buttons being stacked.\n-- Added a ListLayout for notifications.\n-- Increased Size of dropdown list."
+						local UpdateLog = "-- Dropdowns are now functional!!!\n-- Buttons got a new argument(NotiText)\n--- When used it will show a notification of the values\n-- Fixed tab buttons being stacked.\n-- Added a ListLayout for notifications.\n-- Increased Size of dropdown list."
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
