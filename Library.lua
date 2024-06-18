@@ -1672,7 +1672,7 @@ function Library:Window(args)
 				addedChild.Activated:Connect(function()
 					args.Callback(value)
 					Dropdown.Value = value
-					RenderedDropdown.DropDownVisuals.Text = "  "..id
+					RenderedDropdown.DropDownVisuals.Text = "  "..value
 					Dropdown:Toggle()
 				end)
 
