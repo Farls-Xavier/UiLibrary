@@ -1604,7 +1604,6 @@ function Library:Window(args)
 				for i,v in pairs(Dropdown.Items) do
 					v:Remove(i)
 				end
-				table.clear(Dropdown.Children)
 			end
 
 			function Dropdown:Toggle()
