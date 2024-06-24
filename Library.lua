@@ -1741,7 +1741,7 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- Fixed some glitches\n-- Updated UniversalScript\n  Added Highlights/Chams"
+						local UpdateLog = "-- Fixed some glitches\n-- Updated UniversalScript\n      Added Highlights/Chams"
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
