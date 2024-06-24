@@ -1724,7 +1724,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.6.4"
+local currentVer = "1.6.5"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1741,7 +1741,7 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- Increased Size of dropdown list\n-- Dropdowns now have a variable 'Value' for getting selected value\n-- Fixed lag over time from dropdown table not clearing"
+						local UpdateLog = "-- Fixed some glitches\n-- Updated UniversalScript\n  Added Highlights/Chams"
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
