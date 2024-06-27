@@ -1724,7 +1724,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.6.7"
+local currentVer = "1.6.8"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1735,13 +1735,13 @@ if isfolder("@FarlsXavier") then
 		else
 			warn(currentVer, "Does not match: "..oldVer, "Updating...")
 			writefile("@FarlsXavier\\currentVersion.ver", currentVer)
-			wait(.1)
+			task.wait(.1)
 			if readfile("@FarlsXavier\\currentVersion.ver") == currentVer then
 				warn("Updated.")
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- Fixed highlights on universal script.\n         Not working after death"
+						local UpdateLog = "-- Fixed highlights on universal script.\n       Not working after death\n       they now actually work!!"
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
