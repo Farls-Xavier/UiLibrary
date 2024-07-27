@@ -40,6 +40,7 @@ local Mouse = Player:GetMouse()
 
 for i,v in pairs(Player.PlayerGui:GetDescendants()) do
 	if v:IsA("StringValue") and v.Name == "ReferenceValue" then
+		warn("DELETING OLD SCRIPT(IF NOT RIGHT THEN TELL ME)")
 		v.Parent:Destroy()
 	end
 end
@@ -1734,7 +1735,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.7.0"
+local currentVer = "1.7.1"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
