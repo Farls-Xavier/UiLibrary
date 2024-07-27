@@ -36,7 +36,7 @@ local ConfigDecode = HttpService:JSONDecode(readfile("@FarlsXavier\\UiConfig.jso
 local Player = Players.LocalPlayer
 local Mouse = Player:GetMouse()
 
-for i,v in pairs(Player.PlayerGui:GetDescendants()) do
+for i,v in pairs(game.CoreGui:GetDescendants()) do
 	if v:IsA("StringValue") and v.Name == "ReferenceValue" then
 		warn("DELETING OLD SCRIPT(IF NOT RIGHT THEN TELL ME)")
 		v.Parent:Destroy()
@@ -1747,7 +1747,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.7.3"
+local currentVer = "1.7.4"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1764,7 +1764,7 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- You cant load mutliple of this ui lib now(I will add this to config)\n       Finally made spectate button functional :sob:\n       ..."
+						local UpdateLog = "-- You cant load mutliple of this ui lib now(I will add this to config)\n       Finally made spectate button functional\n       ..."
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
