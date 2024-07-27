@@ -1,5 +1,3 @@
---UGHHH MY CODE IS A MESS
-
 local Library = {} -- Temporary name(I say temporary like ill ever change it :sob:)
 
 function Library:strip(str)
@@ -7,9 +5,9 @@ function Library:strip(str)
 end
 
 if isfolder("@FarlsXavier") then
-	warn("Root folder exist!!!!!!!! it really does!!!") -- why the fuck did I do this??? ill leave it
+	warn("Root folder exist!!!!!!!! it really does!!!") -- iot exsit
 else
-	warn("making root folder...") -- idk why I use the word cuck so much I could change it to faggot but oh well!
+	warn("making root folder...")
 	makefolder("@FarlsXavier")
 end
 
@@ -1207,6 +1205,20 @@ function Library:Window(args)
 		end
 	end)
 
+	local Specating = false
+	SpectateButton.Activated:Connect(function()
+		Specating = not Specating
+		if This.SelectedTarget ~= nil then
+			if Specating then
+				SpectateButton.Text = "Spectating"
+				workspace.CurrentCamera.CameraSubject = Players:FindFirstChild(This.SelectedTarget).Character
+			else
+				SpectateButton.Text = "Spectate"
+				workspace.CurrentCamera.CameraSubject = Player.Character
+			end
+		end
+	end)
+
 	function This:Tab(args)
 		args = Library:Validate({
 			Text = "Tab",
@@ -1735,7 +1747,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.7.2"
+local currentVer = "1.7.3"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1752,7 +1764,7 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- You cant load mutliple of this ui lib now(I will add this to config)\n       Ive got a gun to your head and im about to rape you\n       If you try to resist me as I rape you ill kill you\n       if you even think of screaming ill slit your throat"
+						local UpdateLog = "-- You cant load mutliple of this ui lib now(I will add this to config)\n       Finally made spectate button functional :sob:\n       ..."
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
