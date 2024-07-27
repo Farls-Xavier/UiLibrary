@@ -9,7 +9,7 @@ end
 if isfolder("@FarlsXavier") then
 	warn("Root folder exist!!!!!!!! it really does!!!") -- why the fuck did I do this??? ill leave it
 else
-	warn("making root folder...(Dont delete it you cuckold)") -- idk why I use the word cuck so much I could change it to faggot but oh well!
+	warn("making root folder...") -- idk why I use the word cuck so much I could change it to faggot but oh well!
 	makefolder("@FarlsXavier")
 end
 
@@ -38,10 +38,20 @@ local ConfigDecode = HttpService:JSONDecode(readfile("@FarlsXavier\\UiConfig.jso
 local Player = Players.LocalPlayer
 local Mouse = Player:GetMouse()
 
+for i,v in pairs(Player.PlayerGui:GetDescendants()) do
+	if v:IsA("StringValue") and v.Name == "ReferenceValue" then
+		v.Parent:Destroy()
+	end
+end
+
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = RunService:IsStudio() and Player.PlayerGui or game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local RefrenceValue = Instance.new("StringValue", ScreenGui)
+RefrenceValue.Name = "ReferenceValue"
+RefrenceValue.Value = "ITouchKids"
 
 local function MakeDraggable(topbarobject, object) --Skidded from the discord UI.. -1000 aura 
 	local Dragging = nil
@@ -1724,7 +1734,7 @@ function Library:Window(args)
 	return This
 end
 
-local currentVer = "1.6.8"
+local currentVer = "1.7.0"
 if isfolder("@FarlsXavier") then
 	if not isfile("@FarlsXavier\\currentVersion.ver") then
 		writefile("@FarlsXavier\\currentVersion.ver", currentVer)
@@ -1741,7 +1751,7 @@ if isfolder("@FarlsXavier") then
 				coroutine.wrap(function()
 					repeat wait() until Library.WindoHHHH ~= nil
 					if ConfigDecode.StartUpNotifications == true and Library.WindoHHHH ~= nil then
-						local UpdateLog = "-- Fixed highlights on universal script.\n       Not working after death\n       they now actually work!!"
+						local UpdateLog = "-- You cant load mutliple of this ui lib now(I will add this to config)\n       Ive got a gun to your head and im about to rape you\n       If you try to resist me as I rape you ill kill you\n       if you even think of screaming ill slit your throat"
 
 						Library.WindoHHHH:Notification("Notification", "Updated from "..oldVer.." to "..tostring(currentVer), 5)
 						Library.WindoHHHH:PromptLog("Update Log", UpdateLog)
@@ -1753,7 +1763,7 @@ if isfolder("@FarlsXavier") then
 else
 	makefolder("@FarlsXavier")
 	writefile("@FarlsXavier\\currentVersion.ver", currentVer)
-	warn("OH MY FUCKING GOD THERE NO FOLDER STOP DELETING IT YOU CUCK!!! ILL CREATE IS CAUSE IM GOOD BUT STOP IT FOR FUCKS SAKE!!! NEXT TIME ITS YOUR VIRGINITY!!!") -- ONMCE AGAIN WHY DIDNT I USE FAGGOT INSTEAD OF CUCK
+	warn("OH MY FUCKING GOD THERE NO FOLDER STOP DELETING IT!!!")
 end
 
 return Library
